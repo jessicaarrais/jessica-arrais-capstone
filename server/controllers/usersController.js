@@ -4,7 +4,7 @@ const knex = require("knex")(require("../knexfile"));
 exports.getUsers = async (_req, res) => {
   try {
     const data = await knex("users");
-    res.status(200).json(data);
+    res.status(200).send(data);
   } catch (err) {
     res.status(400).send(`My get: Error retrieving users: ${err}`);
   }
@@ -12,13 +12,13 @@ exports.getUsers = async (_req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    await knex
-      .select("*")
-      .from("users")
-      .lefJoin("properties", () =>
-        this.on("users.id", "=", "properties.user_id")
-      )
-      .where({ "users.id": req.params.id });
+    // await knex
+    //   .select("*")
+    //   .from("users")
+    //   .leftJoin("properties", function () {
+    //     this.on("users.id", "=", "properties.user_id");
+    //   })
+    //   .where({ "users.id": req.params.id });
     res.status(200).send("User retrieved");
   } catch (err) {
     res.status(400).send(`Error retrieving user: ${err}`);

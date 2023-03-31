@@ -15,7 +15,9 @@ exports.getProperty = async (req, res) => {
     await knex
       .select("*")
       .from("properties")
-      .lefJoin("users", () => this.on("properties.user_id", "=", "user.id"))
+      .leftJoin("users", function () {
+        this.on("properties.user_id", "=", "user.id");
+      })
       .where({ "properties.id": req.params.id });
     res.status(200).send("Property retrieved");
   } catch (err) {
