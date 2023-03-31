@@ -11,14 +11,15 @@ exports.getProperties = async (_req, res) => {
 };
 
 exports.getProperty = async (req, res) => {
+  console.log(req.params);
   try {
     await knex
       .select("*")
       .from("properties")
       .leftJoin("users", function () {
-        this.on("properties.user_id", "=", "user.id");
+        this.on("properties.user_id", "=", "users.id");
       })
-      .where({ "properties.id": req.params.id });
+      .where({ "properties.id": req.params.propertyId });
     res.status(200).send("Property retrieved");
   } catch (err) {
     res.status(400).send(`Error retrieving property: ${err}`);
@@ -40,7 +41,9 @@ exports.addProperty = async (req, res) => {
 
 exports.updateProperty = async (req, res) => {
   try {
-    await knex("properties").update(req.body).where({ id: req.params.id });
+    await knex("properties")
+      .update(req.body)
+      .where({ id: req.params.propertyId });
     res.status(200).send("Property information updated");
   } catch (err) {
     res.status(400).send(`Error updating properties: ${err}`);
@@ -49,7 +52,7 @@ exports.updateProperty = async (req, res) => {
 
 exports.deleteProperty = async (req, res) => {
   try {
-    await knex("properties").delete().where({ id: req.params.id });
+    await knex("properties").delete().where({ id: req.params.propertyId });
     res.status(200).send(`Property ${req.params.id} successfully deleted.`);
   } catch (err) {
     res.status(400).send(`Error deleting property: ${err}`);

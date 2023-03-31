@@ -12,13 +12,13 @@ exports.getUsers = async (_req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    // await knex
-    //   .select("*")
-    //   .from("users")
-    //   .leftJoin("properties", function () {
-    //     this.on("users.id", "=", "properties.user_id");
-    //   })
-    //   .where({ "users.id": req.params.id });
+    await knex
+      .select("*")
+      .from("users")
+      .leftJoin("properties", function () {
+        this.on("users.id", "=", "properties.user_id");
+      })
+      .where({ "users.id": req.params.userId });
     res.status(200).send("User retrieved");
   } catch (err) {
     res.status(400).send(`Error retrieving user: ${err}`);
@@ -40,7 +40,7 @@ exports.addUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    await knex("users").update(req.body).where({ id: req.params.id });
+    await knex("users").update(req.body).where({ id: req.params.userId });
     res.status(200).send("User information updated");
   } catch (err) {
     res.status(400).send(`Error updating user: ${err}`);
@@ -49,8 +49,8 @@ exports.updateUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    await knex("users").delete().where({ id: req.params.id });
-    res.status(200).send(`User ${req.params.id} successfully deleted.`);
+    await knex("users").delete().where({ id: req.params.userId });
+    res.status(200).send(`User ${req.params.userId} successfully deleted.`);
   } catch (err) {
     res.status(400).send(`Error deleting user: ${err}`);
   }
