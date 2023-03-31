@@ -1,12 +1,12 @@
 const crypto = require("crypto");
-const knex = require("../knexfile");
+const knex = require("knex")(require("../knexfile"));
 
 exports.getProperties = async (_req, res) => {
   try {
     const data = await knex("properties");
     res.status(200).json(data);
   } catch (err) {
-    res.status(400).send(`Error retrieving properties: ${err}`);
+    res.status(400).send(`My get: Error retrieving properties: ${err}`);
   }
 };
 
@@ -25,6 +25,7 @@ exports.getProperty = async (req, res) => {
 
 exports.addProperty = async (req, res) => {
   try {
+    //TODO: check if the req body contains a valid property object.
     const id = crypto.randomUUID();
     await knex("properties").insert(req.body, id);
 
