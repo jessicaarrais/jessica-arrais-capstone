@@ -29,7 +29,8 @@ exports.addUser = async (req, res) => {
   try {
     //TODO: check if the req body contains a valid User object.
     const id = crypto.randomUUID();
-    await knex("users").insert(req.body, id);
+    console.log(req.body);
+    await knex("users").insert({ ...req.body, id });
 
     const newPropertURL = `/api/users/${id}`;
     res.status(201).location(newPropertURL).send(newPropertURL);
