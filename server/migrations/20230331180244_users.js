@@ -12,6 +12,7 @@ exports.up = function (knex) {
     table.string("password").notNullable();
     table.string("email").notNullable();
     table.string("phone").notNullable();
+    table.boolean("has_privileges").notNullable();
     table.timestamps(true, true);
   });
 };
