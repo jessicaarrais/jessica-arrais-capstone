@@ -13,14 +13,14 @@ exports.getProperties = async (_req, res) => {
 exports.getProperty = async (req, res) => {
   console.log(req.params);
   try {
-    await knex
-      .select("*")
+    const data = await knex
+      .select(["properties.*", "users.first_name", "users.email"])
       .from("properties")
       .leftJoin("users", function () {
         this.on("properties.user_id", "=", "users.id");
       })
       .where({ "properties.id": req.params.propertyId });
-    res.status(200).send("Property retrieved");
+    res.status(200).send(data[0]);
   } catch (err) {
     res.status(400).send(`Error retrieving property: ${err}`);
   }
