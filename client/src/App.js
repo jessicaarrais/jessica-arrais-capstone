@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
@@ -9,9 +10,33 @@ import SignupPage from "./pages/SignupPage/SignupPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 import "./App.css";
-import axios from "axios";
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [isAuthValid, setIsAuthValid] = useState(false);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("token")) {
+      return setIsAuthValid(false);
+    }
+    const fetch = async () => {
+      try {
+        const user = axios.get(`http://localhost:8080/api/users/currentUser`, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        });
+        setUser(user.data);
+        setIsAuthValid(true);
+      } catch (err) {
+        console.error(`No user found`);
+        setIsAuthValid(false);
+      }
+    };
+
+    fetch();
+  }, []);
+
   return (
     <BrowserRouter>
       <Header />
@@ -24,7 +49,7 @@ function App() {
           path="/listings/property/:propertyId"
           element={<PropertyPage />}
         />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile" element={<ProfilePage user={user} />} />
       </Routes>
       <Footer />
     </BrowserRouter>
