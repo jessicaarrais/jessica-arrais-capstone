@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import placeholderAvatar from "../../assets/images/placeholder-avatar.png";
+import FormInput from "../../components/FormInput/FormInput";
 import "./LoginPage.scss";
 
 export default function LoginPage() {
@@ -35,30 +36,20 @@ export default function LoginPage() {
           <img className="login__image" src={placeholderAvatar} />
         </div>
         <h2 className="login__page-header">Welcome to your place!</h2>
-        <div className="login__input-box">
-          <label className="login__input-label" htmlFor="username">
-            Username:
-          </label>
-          <input
-            className="login__input"
-            type="email"
-            name="email"
-            value={inputValues.email}
-            onChange={handleOnChange}
-          />
-        </div>
-        <div className="login__input-box">
-          <label className="login__input-label" htmlFor="password">
-            Password:
-          </label>
-          <input
-            className="login__input"
-            type="password"
-            name="password"
-            value={inputValues.password}
-            onChange={handleOnChange}
-          />
-        </div>
+        <FormInput
+          label="Email:"
+          name="email"
+          type="email"
+          value={inputValues.email}
+          handleOnChange={handleOnChange}
+        />
+        <FormInput
+          label="Password:"
+          name="password"
+          type="password"
+          value={inputValues.password}
+          handleOnChange={handleOnChange}
+        />
         <Button emphasis="high-emphasis" text="LOGIN" type="submit" />
       </form>
     </main>

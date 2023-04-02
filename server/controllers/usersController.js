@@ -2,7 +2,6 @@ require("dotenv").config();
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { groupCollapsed } = require("console");
 const knex = require("knex")(require("../knexfile"));
 
 /* 
@@ -110,9 +109,10 @@ exports.getUser = async (req, res) => {
     let properties;
     if (user[0].has_privileges) {
       properties = await knex("properties").where({ user_id: user[0].id });
-    }
 
-    res.status(200).json([user[0], ...properties]);
+      res.status(200).json([user[0], ...properties]);
+    }
+    res.status(200).json([user[0]]);
   } catch (err) {
     res.status(400).send(`Error retrieving user: ${err}`);
   }
