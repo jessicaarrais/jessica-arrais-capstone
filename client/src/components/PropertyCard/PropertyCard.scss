@@ -1,0 +1,44 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.property-card {
+  width: 100%;
+  height: 100%;
+  border: 0.075rem solid $secondary-dark-color;
+  border-radius: 0.4rem;
+  overflow: hidden;
+
+  &__img {
+    width: 100%;
+  }
+
+  &__text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  &__subheader {
+    @include t-subheader($primary-dark-color);
+  }
+
+  &__body-large {
+    @include t-body-large($secondary-dark-color);
+  }
+
+  &__icon {
+    width: 1.5rem;
+    margin-right: 0.25rem;
+  }
+
+  &__info-box {
+    width: 50%;
+    justify-content: space-between;
+  }
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+}

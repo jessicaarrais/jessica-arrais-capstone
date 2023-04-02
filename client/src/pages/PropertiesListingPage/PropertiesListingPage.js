@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
+import "./PropertiesListingPage.scss";
 
 export default function PropertiesListingPage() {
   const [properties, setProperties] = useState();
@@ -21,7 +22,7 @@ export default function PropertiesListingPage() {
   }, []);
 
   return (
-    <main>
+    <main className="property-list">
       {properties &&
         properties.map((property) => (
           <PropertyCard key={property.id} property={property} />
