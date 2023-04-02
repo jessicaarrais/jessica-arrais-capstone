@@ -8,7 +8,7 @@ const knex = require("knex")(require("../knexfile"));
   Response format { id, email, iat }
 */
 exports.getCurrentUser = async (req, res) => {
-  if (req.validatedToken) res.status(200).json(req.validatedToken);
+  if (req.validatedToken) res.json(req.validatedToken);
 };
 
 /* 
@@ -110,7 +110,7 @@ exports.getUser = async (req, res) => {
     if (user[0].has_privileges) {
       properties = await knex("properties").where({ user_id: user[0].id });
 
-      res.status(200).json([user[0], ...properties]);
+      return res.status(200).json([user[0], ...properties]);
     }
     res.status(200).json([user[0]]);
   } catch (err) {
