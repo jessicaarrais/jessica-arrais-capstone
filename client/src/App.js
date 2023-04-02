@@ -13,6 +13,7 @@ import "./App.scss";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [properties, setProperties] = useState(null);
   const [isAuthValid, setIsAuthValid] = useState(false);
 
   useEffect(() => {
@@ -29,10 +30,15 @@ function App() {
             },
           }
         );
+
         const userData = await axios.get(
           `http://localhost:8080/api/users/${currentUser.data.id}`
         );
-        setUser(userData.data);
+
+        /* userData.data = [{ user }, { property if any }] */
+        setUser(userData.data[0]);
+        if (userData.data.length > 1)
+          setProperties(userData.data.slice(1, userData.data.length - 1));
         setIsAuthValid(true);
       } catch (err) {
         console.error(`No user found`);
@@ -45,7 +51,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header username={user?.username} />
       <Routes>
         <Route path="/" element={<h1>I am a Landing Page</h1>} />
         <Route path="/login" element={<LoginPage />} />
@@ -58,7 +64,13 @@ function App() {
         {user && (
           <Route
             path="/profile"
-            element={<ProfilePage isAuthValid={isAuthValid} user={user} />}
+            element={
+              <ProfilePage
+                isAuthValid={isAuthValid}
+                user={user}
+                properties={properties}
+              />
+            }
           />
         )}
       </Routes>

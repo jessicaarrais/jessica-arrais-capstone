@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ProfilePage({ user, isAuthValid }) {
+export default function ProfilePage({ user, properties, isAuthValid }) {
   const navigate = useNavigate();
-  console.log(user, isAuthValid);
+  console.log(user, isAuthValid, properties);
+
   useEffect(() => {
     if (!isAuthValid) navigate("/");
   }, []);
@@ -11,7 +12,7 @@ export default function ProfilePage({ user, isAuthValid }) {
   return (
     <main>
       <h2>Profile</h2>
-      <h3>{`${user[0].first_name} ${user[0].last_name}`}</h3>
+      <h3>{`${user.first_name} ${user.last_name}`}</h3>
       <p>admin properties</p>
     </main>
   );

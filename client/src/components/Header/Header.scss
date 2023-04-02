@@ -1,0 +1,15 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.header {
+  height: 5rem;
+  border-bottom: 0.075rem solid $secondary-light-color;
+  padding: 0 2rem;
+
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+}
