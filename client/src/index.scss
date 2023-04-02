@@ -1,0 +1,15 @@
+@use "./styles/partials/variables.scss" as *;
+@use "./styles/partials/mixins.scss" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Titillium Web", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}

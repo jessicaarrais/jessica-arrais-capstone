@@ -9,7 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
-import "./App.css";
+import "./App.scss";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -21,12 +21,18 @@ function App() {
     }
     const fetch = async () => {
       try {
-        const user = axios.get(`http://localhost:8080/api/users/currentUser`, {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        });
-        setUser(user.data);
+        const currentUser = await axios.get(
+          `http://localhost:8080/api/users/currentUser`,
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            },
+          }
+        );
+        const userData = await axios.get(
+          `http://localhost:8080/api/users/${currentUser.data.id}`
+        );
+        setUser(userData.data);
         setIsAuthValid(true);
       } catch (err) {
         console.error(`No user found`);
@@ -49,7 +55,12 @@ function App() {
           path="/listings/property/:propertyId"
           element={<PropertyPage />}
         />
-        <Route path="/profile" element={<ProfilePage user={user} />} />
+        {user && (
+          <Route
+            path="/profile"
+            element={<ProfilePage isAuthValid={isAuthValid} user={user} />}
+          />
+        )}
       </Routes>
       <Footer />
     </BrowserRouter>

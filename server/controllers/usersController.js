@@ -2,12 +2,19 @@ require("dotenv").config();
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { groupCollapsed } = require("console");
 const knex = require("knex")(require("../knexfile"));
 
+/* 
+  Response format { id, email, iat }
+*/
 exports.getCurrentUser = async (req, res) => {
   if (req.validatedToken) res.status(200).json(req.validatedToken);
 };
 
+/* 
+  Response format { token }
+*/
 exports.signupUser = async (req, res) => {
   try {
     const { password } = req.body;
@@ -36,6 +43,9 @@ exports.signupUser = async (req, res) => {
   }
 };
 
+/* 
+  Response format { token }
+*/
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -60,25 +70,49 @@ exports.loginUser = async (req, res) => {
   }
 };
 
+/* 
+  Response format [{ id, first_name, last_name, email }]
+*/
 exports.getUsers = async (_req, res) => {
   try {
-    const data = await knex("users");
-    res.status(200).json(data);
+    const users = await knex
+      .select("id", "first_name", "last_name", "email")
+      .from("users");
+    res.status(200).json(users);
   } catch (err) {
     res.status(400).send(`My get: Error retrieving users: ${err}`);
   }
 };
 
+/* 
+  Response format [
+    { username, first_name, last_name, email, has_privileges}, 
+    { id, user_id, 
+      address, city, state, country, area, price, fees, availability, bedrooms, 
+      bathrooms, description, features, amenities, pictures, created_at, updated_at 
+    }
+  ]
+*/
 exports.getUser = async (req, res) => {
   try {
     const user = await knex
-      .select("*")
+      .select(
+        "id",
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "has_privileges"
+      )
       .from("users")
-      .leftJoin("properties", function () {
-        this.on("users.id", "=", "properties.user_id");
-      })
       .where({ "users.id": req.params.userId });
-    res.status(200).json(user);
+
+    let properties;
+    if (user[0].has_privileges) {
+      properties = await knex("properties").where({ user_id: user[0].id });
+    }
+
+    res.status(200).json([user[0], ...properties]);
   } catch (err) {
     res.status(400).send(`Error retrieving user: ${err}`);
   }

@@ -1,0 +1,76 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.default-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 0.4rem;
+  width: 100%;
+  height: 2.5rem;
+  cursor: pointer;
+
+  @include tablet {
+    padding: 0.5rem 1rem;
+  }
+
+  &--high-emphasis {
+    @include m-button($primary-light-color);
+    background-color: $primary-key-color;
+
+    @include tablet {
+      @include t-button($primary-light-color);
+    }
+  }
+
+  &--low-emphasis {
+    @include m-button($secondary-dark-color);
+    background-color: $primary-light-color;
+    border: 0.063rem solid $secondary-light-color;
+
+    @include tablet {
+      @include t-button($secondary-dark-color);
+    }
+  }
+
+  &--dangerous-emphasis {
+    @include m-button($primary-light-color);
+    background-color: $accent-negative-color;
+
+    @include tablet {
+      @include t-button($primary-light-color);
+    }
+  }
+
+  &--mHidden {
+    width: 2.5rem;
+
+    @include tablet {
+      width: auto;
+    }
+  }
+
+  &:hover {
+    background-color: $background-dark-color;
+  }
+
+  &__icon {
+    height: 1.5rem;
+    width: 1.5rem;
+
+    @include tablet {
+      margin-right: 0.5rem;
+    }
+  }
+
+  &__text {
+    &--mHidden {
+      display: none;
+
+      @include tablet {
+        display: inline-block;
+      }
+    }
+  }
+}

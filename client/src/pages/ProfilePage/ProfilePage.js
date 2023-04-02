@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function ProfilePage({ user }) {
+export default function ProfilePage({ user, isAuthValid }) {
+  const navigate = useNavigate();
+  console.log(user, isAuthValid);
+  useEffect(() => {
+    if (!isAuthValid) navigate("/");
+  }, []);
+
   return (
     <main>
       <h2>Profile</h2>
-      {user && <p>admin properties</p>}
+      <h3>{`${user[0].first_name} ${user[0].last_name}`}</h3>
+      <p>admin properties</p>
     </main>
   );
 }
