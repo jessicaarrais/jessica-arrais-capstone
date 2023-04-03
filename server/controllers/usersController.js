@@ -30,7 +30,7 @@ exports.signupUser = async (req, res) => {
         });
 
         const token = jwt.sign(
-          { id: user[0].id, email: user[0].email },
+          { id, email: req.body.email },
           process.env.JWT_KEY
         );
 

@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.25rem;
   border: none;
   border-radius: 0.4rem;
   width: 100%;
@@ -52,16 +53,12 @@
   }
 
   &:hover {
-    background-color: $background-dark-color;
+    background-color: $background-light-color;
   }
 
   &__icon {
     height: 1.5rem;
     width: 1.5rem;
-
-    @include tablet {
-      margin-right: 0.5rem;
-    }
   }
 
   &__text {

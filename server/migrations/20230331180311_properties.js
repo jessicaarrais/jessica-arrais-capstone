@@ -23,6 +23,8 @@ exports.up = function (knex) {
     table.string("description").notNullable();
     table.string("features").notNullable();
     table.string("amenities").notNullable();
+    table.string("type").notNullable();
+    table.boolean("pets").notNullable();
     table.string("pictures").notNullable();
     table.timestamps(true, true);
   });

@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import placeholderAvatar from "../../assets/images/placeholder-avatar.png";
 import FormInput from "../../components/FormInput/FormInput";
+import UserContext from "../../UserContext";
 import "./LoginPage.scss";
 
 export default function LoginPage() {
+  const { login } = useContext(UserContext);
   const [inputValues, setInputValues] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -22,7 +24,25 @@ export default function LoginPage() {
         `http://localhost:8080/api/users/login`,
         inputValues
       );
+
+      if (!userToken.data.token) return alert("Invalid user");
+
       sessionStorage.setItem("token", userToken.data.token);
+      const currentUser = await axios.get(
+        `http://localhost:8080/api/users/currentUser`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      const userData = await axios.get(
+        `http://localhost:8080/api/users/${currentUser.data.id}`
+      );
+
+      /* userData.data = [{ user }, { property if any }] */
+      login(userData.data[0]);
       navigate("/");
     } catch (err) {
       console.error(`Could not find user. Error: ${err}`);

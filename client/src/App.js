@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -10,9 +10,10 @@ import SignupPage from "./pages/SignupPage/SignupPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 import "./App.scss";
+import UserContext from "./UserContext";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const { user, login } = useContext(UserContext);
   const [properties, setProperties] = useState(null);
   const [isAuthValid, setIsAuthValid] = useState(false);
 
@@ -36,7 +37,7 @@ function App() {
         );
 
         /* userData.data = [{ user }, { property if any }] */
-        setUser(userData.data[0]);
+        login(userData.data[0]);
         if (userData.data.length > 1)
           setProperties(userData.data.slice(1, userData.data.length - 1));
         setIsAuthValid(true);
