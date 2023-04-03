@@ -3,20 +3,26 @@ import UserContext from "./UserContext";
 
 export default function UserContextProvider(props) {
   const [user, setUser] = useState(null);
+  const [properties, setProperties] = useState(null);
+
   const contextValue = useMemo(
     () => ({
       user,
-      login: (user) => {
+      registerUser: (user) => {
         setUser(user);
       },
-      signup: (user) => {
-        setUser(user);
-      },
-      logout: () => {
+      unregisterUser: () => {
         setUser(null);
       },
+      properties,
+      registerProperties: (properties) => {
+        setProperties(properties);
+      },
+      unregisterProperties: (properties) => {
+        setProperties(properties);
+      },
     }),
-    [user]
+    [user, properties]
   );
   return (
     <UserContext.Provider value={contextValue}>

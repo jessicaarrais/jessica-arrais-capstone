@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import aptIcon from "../../assets/icons/apt-icon.png";
 import houseIcon from "../../assets/icons/house-icon.png";
@@ -7,6 +7,8 @@ import userAvatar from "../../assets/images/placeholder-avatar.png";
 import "./Header.scss";
 
 export default function Header({ username }) {
+  const navigate = useNavigate();
+
   return (
     <header className="header">
       <div className="header__box">
@@ -29,8 +31,16 @@ export default function Header({ username }) {
           </NavLink>
         ) : (
           <div className="header__sign-buttons-box">
-            <Button text="Login" emphasis="high-emphasis" />
-            <Button text="Signup" emphasis="low-emphasis" />
+            <Button
+              text="Login"
+              emphasis="high-emphasis"
+              handleOnClick={() => navigate("/login")}
+            />
+            <Button
+              text="Signup"
+              emphasis="low-emphasis"
+              handleOnClick={() => navigate("/signup")}
+            />
           </div>
         )}
       </div>

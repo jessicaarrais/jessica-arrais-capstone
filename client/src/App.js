@@ -1,6 +1,6 @@
-import axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { validateUser } from "./utils/validateUser";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import PropertyPage from "./pages/PropertyPage/PropertyPage";
@@ -8,46 +8,19 @@ import PropertiesListingPage from "./pages/PropertiesListingPage/PropertiesListi
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-
-import "./App.scss";
 import UserContext from "./UserContext";
+import "./App.scss";
 
 function App() {
-  const { user, login } = useContext(UserContext);
-  const [properties, setProperties] = useState(null);
-  const [isAuthValid, setIsAuthValid] = useState(false);
+  const { user, registerUser, registerProperties, properties } =
+    useContext(UserContext);
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
-      return setIsAuthValid(false);
+      return;
     }
-    const fetch = async () => {
-      try {
-        const currentUser = await axios.get(
-          `http://localhost:8080/api/users/currentUser`,
-          {
-            headers: {
-              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            },
-          }
-        );
 
-        const userData = await axios.get(
-          `http://localhost:8080/api/users/${currentUser.data.id}`
-        );
-
-        /* userData.data = [{ user }, { property if any }] */
-        login(userData.data[0]);
-        if (userData.data.length > 1)
-          setProperties(userData.data.slice(1, userData.data.length - 1));
-        setIsAuthValid(true);
-      } catch (err) {
-        console.error(`No user found`);
-        setIsAuthValid(false);
-      }
-    };
-
-    fetch();
+    validateUser(registerUser, registerProperties);
   }, []);
 
   return (
@@ -65,13 +38,7 @@ function App() {
         {user && (
           <Route
             path="/profile"
-            element={
-              <ProfilePage
-                isAuthValid={isAuthValid}
-                user={user}
-                properties={properties}
-              />
-            }
+            element={<ProfilePage user={user} properties={properties} />}
           />
         )}
       </Routes>

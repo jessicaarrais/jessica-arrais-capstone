@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { validateUser } from "../../utils/validateUser";
 import Button from "../../components/Button/Button";
-import placeholderAvatar from "../../assets/images/placeholder-avatar.png";
 import FormInput from "../../components/FormInput/FormInput";
 import UserContext from "../../UserContext";
 import "./SignupPage.scss";
 
 export default function LoginPage() {
-  const { signup } = useContext(UserContext);
+  const { registerUser, registerProperties } = useContext(UserContext);
   const [inputValues, setInputValues] = useState({
     username: "",
     first_name: "",
@@ -38,21 +38,10 @@ export default function LoginPage() {
       if (!userToken.data.token) return alert("Invalid user");
 
       sessionStorage.setItem("token", userToken.data.token);
-      const currentUser = await axios.get(
-        `http://localhost:8080/api/users/currentUser`,
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        }
-      );
 
-      const userData = await axios.get(
-        `http://localhost:8080/api/users/${currentUser.data.id}`
-      );
+      const fulfilled = await validateUser(registerUser, registerProperties);
+      if (!fulfilled) return alert("Signup failed. Try again");
 
-      /* userData.data = [{ user }, { property if any }] */
-      signup(userData.data[0]);
       navigate("/");
     } catch (err) {
       console.error(`Could not find user. Error: ${err}`);

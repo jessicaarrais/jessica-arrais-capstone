@@ -6,9 +6,10 @@ import placeholderAvatar from "../../assets/images/placeholder-avatar.png";
 import FormInput from "../../components/FormInput/FormInput";
 import UserContext from "../../UserContext";
 import "./LoginPage.scss";
+import { validateUser } from "../../utils/validateUser";
 
 export default function LoginPage() {
-  const { login } = useContext(UserContext);
+  const { registerUser, registerProperties } = useContext(UserContext);
   const [inputValues, setInputValues] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -20,29 +21,18 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const userToken = await axios.post(
+      const user = await axios.post(
         `http://localhost:8080/api/users/login`,
         inputValues
       );
 
-      if (!userToken.data.token) return alert("Invalid user");
+      if (!user.data.token) return alert("Invalid user");
 
-      sessionStorage.setItem("token", userToken.data.token);
-      const currentUser = await axios.get(
-        `http://localhost:8080/api/users/currentUser`,
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        }
-      );
+      sessionStorage.setItem("token", user.data.token);
 
-      const userData = await axios.get(
-        `http://localhost:8080/api/users/${currentUser.data.id}`
-      );
+      const fulfilled = await validateUser(registerUser, registerProperties);
+      if (!fulfilled) return alert("Login failed. Try again");
 
-      /* userData.data = [{ user }, { property if any }] */
-      login(userData.data[0]);
       navigate("/");
     } catch (err) {
       console.error(`Could not find user. Error: ${err}`);
@@ -53,7 +43,11 @@ export default function LoginPage() {
     <main className="login">
       <form className="login__form" onSubmit={handleOnSubmit}>
         <div className="login__image-box">
-          <img className="login__image" src={placeholderAvatar} />
+          <img
+            className="login__image"
+            src={placeholderAvatar}
+            alt="user avatar"
+          />
         </div>
         <h2 className="login__page-header">Welcome to your place!</h2>
         <FormInput

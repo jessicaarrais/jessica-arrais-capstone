@@ -6,7 +6,7 @@ export default function ProfilePage({ user, properties, isAuthValid }) {
   console.log(user, isAuthValid, properties);
 
   useEffect(() => {
-    if (!isAuthValid) navigate("/");
+    if (!user) navigate("/");
   }, []);
 
   return (
