@@ -14,6 +14,7 @@ export default function PropertiesListingPage() {
     useContext(PropertiesContext);
   const [filteredProperties, setFilteredProperties] = useState();
   const [params, setParams] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +33,11 @@ export default function PropertiesListingPage() {
     fetch();
   }, []);
 
-  const handleOnClick = (query, value) => {
+  const handleOnSearch = (e) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const handleOnFilter = (query, value) => {
     const searchParams = createSearchParams(params);
 
     if (params.includes(query)) searchParams.delete(query);
@@ -45,7 +50,7 @@ export default function PropertiesListingPage() {
       search: searchParams.toString(),
     });
 
-    const newFilter = filteredProperties.filter((prop) => {
+    const newFilter = allProperties.filter((prop) => {
       console.log(prop[query], value);
       return prop[query] === value;
     });
@@ -57,20 +62,27 @@ export default function PropertiesListingPage() {
   return (
     <main className="property-list">
       <div className="property-list__filters">
+        <input
+          className="property-list__searchbar"
+          type="text"
+          onChange={handleOnSearch}
+          placeholder="Search for city"
+        />
+
         <Button
           icon={houseIcon}
           emphasis="low-emphasis"
-          handleOnClick={() => handleOnClick("type", "house")}
+          handleOnClick={() => handleOnFilter("type", "house")}
         />
         <Button
           icon={aptIcon}
           emphasis="low-emphasis"
-          handleOnClick={() => handleOnClick("type", "apartment")}
+          handleOnClick={() => handleOnFilter("type", "apartment")}
         />
         <Button
           icon={petIcon}
           emphasis="low-emphasis"
-          handleOnClick={() => handleOnClick("pets", 1)}
+          handleOnClick={() => handleOnFilter("pets", 1)}
         />
         <Button
           emphasis="low-emphasis"
@@ -83,9 +95,11 @@ export default function PropertiesListingPage() {
       </div>
       <div className="property-list__list">
         {filteredProperties &&
-          filteredProperties.map((property) => (
-            <PropertyCard key={property.id} property={property} />
-          ))}
+          filteredProperties
+            .filter((prop) => prop.city.toLowerCase().includes(searchKeyword))
+            .map((property) => (
+              <PropertyCard key={property.id} property={property} />
+            ))}
       </div>
     </main>
   );
