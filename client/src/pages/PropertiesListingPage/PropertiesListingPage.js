@@ -38,17 +38,17 @@ export default function PropertiesListingPage() {
   };
 
   const handleOnFilter = (query, value) => {
-    const searchParams = createSearchParams(params);
+    // const searchParams = createSearchParams(params);
 
-    if (params.includes(query)) searchParams.delete(query);
-    else searchParams.append(query, value);
+    // if (params.includes(query)) searchParams.delete(query);
+    // else searchParams.append(query, value);
 
-    setParams(searchParams.toString());
+    // setParams(searchParams.toString());
 
-    navigate({
-      pathname: "/listings",
-      search: searchParams.toString(),
-    });
+    // navigate({
+    //   pathname: "/listings",
+    //   search: searchParams.toString(),
+    // });
 
     const newFilter = allProperties.filter((prop) => {
       console.log(prop[query], value);
