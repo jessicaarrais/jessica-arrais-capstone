@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import placeholderAvatar from "../../assets/images/placeholder-avatar.png";
 import FormInput from "../../components/FormInput/FormInput";
-import UserContext from "../../UserContext";
+import UserContext from "../../contexts/UserContext";
 import "./LoginPage.scss";
 import { validateUser } from "../../utils/validateUser";
 

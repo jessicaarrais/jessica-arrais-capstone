@@ -1,7 +1,17 @@
 .property-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  width: 50rem;
-  margin: 2rem auto;
+  &__filters {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 1rem;
+    padding: 0.5rem 2rem;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    width: 50rem;
+    margin: 2rem auto;
+  }
 }

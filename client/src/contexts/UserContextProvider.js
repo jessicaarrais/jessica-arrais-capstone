@@ -18,12 +18,13 @@ export default function UserContextProvider(props) {
       registerProperties: (properties) => {
         setProperties(properties);
       },
-      unregisterProperties: (properties) => {
-        setProperties(properties);
+      unregisterProperties: () => {
+        setProperties(null);
       },
     }),
     [user, properties]
   );
+
   return (
     <UserContext.Provider value={contextValue}>
       {props.children}

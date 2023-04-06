@@ -1,10 +1,20 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, createSearchParams } from "react-router-dom";
+import PropertiesContext from "../../contexts/PropertiesContext";
+import Button from "../../components/Button/Button";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
+import aptIcon from "../../assets/icons/apt-icon.png";
+import houseIcon from "../../assets/icons/house-icon.png";
+import petIcon from "../../assets/icons/pet-icon.png";
 import "./PropertiesListingPage.scss";
 
 export default function PropertiesListingPage() {
-  const [properties, setProperties] = useState();
+  const { allProperties, registerAllProperties } =
+    useContext(PropertiesContext);
+  const [filteredProperties, setFilteredProperties] = useState();
+  const [params, setParams] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetch = async () => {
@@ -12,7 +22,8 @@ export default function PropertiesListingPage() {
         const properties = await axios.get(
           `http://localhost:8080/api/properties`
         );
-        setProperties(properties.data);
+        registerAllProperties(properties.data);
+        setFilteredProperties(properties.data);
       } catch (err) {
         console.error(`Faild retrieving properties list. Error: ${err}`);
       }
@@ -21,12 +32,61 @@ export default function PropertiesListingPage() {
     fetch();
   }, []);
 
+  const handleOnClick = (query, value) => {
+    const searchParams = createSearchParams(params);
+
+    if (params.includes(query)) searchParams.delete(query);
+    else searchParams.append(query, value);
+
+    setParams(searchParams.toString());
+
+    navigate({
+      pathname: "/listings",
+      search: searchParams.toString(),
+    });
+
+    const newFilter = filteredProperties.filter((prop) => {
+      console.log(prop[query], value);
+      return prop[query] === value;
+    });
+    console.log(newFilter);
+
+    setFilteredProperties(newFilter);
+  };
+
   return (
     <main className="property-list">
-      {properties &&
-        properties.map((property) => (
-          <PropertyCard key={property.id} property={property} />
-        ))}
+      <div className="property-list__filters">
+        <Button
+          icon={houseIcon}
+          emphasis="low-emphasis"
+          handleOnClick={() => handleOnClick("type", "house")}
+        />
+        <Button
+          icon={aptIcon}
+          emphasis="low-emphasis"
+          handleOnClick={() => handleOnClick("type", "apartment")}
+        />
+        <Button
+          icon={petIcon}
+          emphasis="low-emphasis"
+          handleOnClick={() => handleOnClick("pets", 1)}
+        />
+        <Button
+          emphasis="low-emphasis"
+          text="Clear"
+          handleOnClick={() => {
+            navigate("/listings");
+            setFilteredProperties(allProperties);
+          }}
+        />
+      </div>
+      <div className="property-list__list">
+        {filteredProperties &&
+          filteredProperties.map((property) => (
+            <PropertyCard key={property.id} property={property} />
+          ))}
+      </div>
     </main>
   );
 }

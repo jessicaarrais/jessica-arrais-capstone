@@ -8,8 +8,9 @@ import PropertiesListingPage from "./pages/PropertiesListingPage/PropertiesListi
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import UserContext from "./UserContext";
+import UserContext from "./contexts/UserContext";
 import "./App.scss";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 function App() {
   const { user, registerUser, registerProperties, properties } =
@@ -27,7 +28,7 @@ function App() {
     <BrowserRouter>
       <Header username={user?.username} />
       <Routes>
-        <Route path="/" element={<h1>I am a Landing Page</h1>} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/listings" element={<PropertiesListingPage />} />

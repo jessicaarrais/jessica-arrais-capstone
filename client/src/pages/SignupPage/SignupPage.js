@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { validateUser } from "../../utils/validateUser";
 import Button from "../../components/Button/Button";
 import FormInput from "../../components/FormInput/FormInput";
-import UserContext from "../../UserContext";
+import UserContext from "../../contexts/UserContext";
 import "./SignupPage.scss";
 
 export default function LoginPage() {

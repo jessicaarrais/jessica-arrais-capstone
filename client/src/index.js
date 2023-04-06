@@ -1,15 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import UserContextProvider from "./UserContextProvider";
+import UserContextProvider from "./contexts/UserContextProvider";
+import "./index.scss";
+import PropertiesContextProvider from "./contexts/PropertiesContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <UserContextProvider>
-      <App />
+      <PropertiesContextProvider>
+        <App />
+      </PropertiesContextProvider>
     </UserContextProvider>
   </React.StrictMode>
 );

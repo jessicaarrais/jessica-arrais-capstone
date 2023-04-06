@@ -10,24 +10,6 @@ exports.getAllProperties = async (_req, res) => {
   }
 };
 
-exports.getFilteredProperties = async (req, res) => {
-  try {
-    console.log(req.query);
-
-    const data = await knex
-      .select("*")
-      .from("properties")
-      .where({
-        type: req.query.type1 !== null && req.query.type1,
-        type: req.query.type2 !== null && req.query.type2,
-        pets: req.query.pets !== null && true,
-      });
-    res.status(200).send(data);
-  } catch (err) {
-    console.error(`Failed retrieving properties. Error: ${err}`);
-  }
-};
-
 exports.getProperty = async (req, res) => {
   try {
     const data = await knex

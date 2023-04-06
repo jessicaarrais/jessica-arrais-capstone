@@ -2,7 +2,7 @@
 @use "../../styles/partials/variables" as *;
 
 .header {
-  height: 5rem;
+  height: 4rem;
   border-bottom: 0.075rem solid $secondary-light-color;
   box-shadow: 0 0.125rem 0.313rem rgba($primary-dark-color, 10%);
   padding: 0 2rem;
@@ -15,7 +15,7 @@
   }
 
   &__logo {
-    height: 5rem;
+    height: 4rem;
   }
 
   &__body-large {
@@ -37,11 +37,4 @@
     display: flex;
     gap: 1rem;
   }
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  gap: 1rem;
 }
