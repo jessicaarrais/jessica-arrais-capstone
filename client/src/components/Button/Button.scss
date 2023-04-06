@@ -23,10 +23,6 @@
     @include tablet {
       @include t-button($primary-light-color);
     }
-
-    &:hover {
-      background-color: rgba($primary-key-color, 0.7);
-    }
   }
 
   &--low-emphasis {
@@ -36,10 +32,6 @@
 
     @include tablet {
       @include t-button($secondary-dark-color);
-    }
-
-    &:hover {
-      background-color: $background-light-color;
     }
   }
 
@@ -51,10 +43,10 @@
     @include tablet {
       @include t-button($primary-dark-color);
     }
+  }
 
-    &:hover {
-      background-color: $background-light-color;
-    }
+  &:hover {
+    background-color: rgba($primary-key-color, 0.2);
   }
 
   &--dangerous-emphasis {
