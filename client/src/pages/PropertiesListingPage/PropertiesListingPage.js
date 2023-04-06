@@ -13,7 +13,8 @@ export default function PropertiesListingPage() {
   const { allProperties, registerAllProperties } =
     useContext(PropertiesContext);
   const [filteredProperties, setFilteredProperties] = useState();
-  const [params, setParams] = useState("");
+  const [sort, setSort] = useState();
+  // const [params, setParams] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
 
@@ -86,21 +87,44 @@ export default function PropertiesListingPage() {
         />
         <Button
           emphasis="low-emphasis"
+          text="Price $"
+          handleOnClick={() => setSort("lower")}
+        />
+        <Button
+          emphasis="low-emphasis"
+          text="Price $$$$"
+          handleOnClick={() => setSort("higher")}
+        />
+        <Button
+          emphasis="low-emphasis"
           text="Clear"
           handleOnClick={() => {
             navigate("/listings");
             setFilteredProperties(allProperties);
+            setSort("");
           }}
         />
       </div>
-      <div className="property-list__list">
-        {filteredProperties &&
-          filteredProperties
-            .filter((prop) => prop.city.toLowerCase().includes(searchKeyword))
-            .map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
-      </div>
+      <section className="property-list__section">
+        <div className="property-list__list">
+          {filteredProperties &&
+            filteredProperties
+              .filter((prop) => prop.city.toLowerCase().includes(searchKeyword))
+              .sort((propA, propB) => {
+                console.log(propA.price, propB.price);
+                console.log(propA.price > propB.price);
+                console.log(sort);
+                if (sort === "lower")
+                  return propA.price.localeCompare(propB.price);
+                else if (sort === "higher")
+                  return propB.price.localeCompare(propA.price);
+              })
+              .map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+        </div>
+        <div className="property-list__map">Maps</div>
+      </section>
     </main>
   );
 }

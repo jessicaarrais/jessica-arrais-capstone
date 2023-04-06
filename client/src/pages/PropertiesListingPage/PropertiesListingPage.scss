@@ -2,6 +2,9 @@
 @use "../../styles/partials/variables" as *;
 
 .property-list {
+  max-width: 80rem;
+  margin: 0 auto;
+
   &__searchbar {
     box-sizing: border-box;
     width: 100%;
@@ -23,11 +26,29 @@
     padding: 0.5rem 2rem;
   }
 
+  &__section {
+    display: flex;
+    max-height: calc(100vh - 8rem);
+    padding: 0.5rem 2rem;
+  }
+
   &__list {
+    overflow-y: scroll;
+    flex-grow: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     width: 40rem;
-    margin: 2rem auto;
+    height: calc(100vh - 11.5rem);
+
+    padding-right: 2rem;
+  }
+
+  &__map {
+    width: 40rem;
+    height: calc(100vh - 11.5rem);
+    background-color: $background-light-color;
+    background-image: url("../../assets/images/placeholder-map.png");
+    background-size: cover;
   }
 }
