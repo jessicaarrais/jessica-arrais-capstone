@@ -10,6 +10,11 @@ export default function Header({ username }) {
   const { unregisterUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    unregisterUser();
+  };
+
   return (
     <header className="header">
       <nav className="header__box">
@@ -29,7 +34,7 @@ export default function Header({ username }) {
             <Button
               text="Logout"
               emphasis="link-emphasis"
-              handleOnClick={() => unregisterUser()}
+              handleOnClick={handleLogout}
             />
           </div>
         ) : (

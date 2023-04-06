@@ -111,9 +111,6 @@ export default function PropertiesListingPage() {
             filteredProperties
               .filter((prop) => prop.city.toLowerCase().includes(searchKeyword))
               .sort((propA, propB) => {
-                console.log(propA.price, propB.price);
-                console.log(propA.price > propB.price);
-                console.log(sort);
                 if (sort === "lower")
                   return propA.price.localeCompare(propB.price);
                 else if (sort === "higher")
