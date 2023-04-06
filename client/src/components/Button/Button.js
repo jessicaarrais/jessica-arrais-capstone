@@ -10,7 +10,9 @@ export default function Button({
 }) {
   return (
     <button
-      className={`default-button default-button--${emphasis} default-button--${mHidden}`}
+      className={`default-button default-button--${emphasis} ${
+        mHidden ? "default-button--mHidden" : ""
+      }`}
       type={type}
       onClick={handleOnClick}
     >
@@ -18,7 +20,11 @@ export default function Button({
         <img src={icon} className="default-button__icon" alt="button icon" />
       )}
       {text && (
-        <p className={`default-button__text default-button__text--${mHidden}`}>
+        <p
+          className={`default-button__text ${
+            mHidden ? "default-button__text--mHidden" : ""
+          }`}
+        >
           {text}
         </p>
       )}

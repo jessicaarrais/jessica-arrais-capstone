@@ -35,6 +35,16 @@
     }
   }
 
+  &--link-emphasis {
+    @include m-button($primary-dark-color);
+    background-color: $primary-light-color;
+    text-decoration: underline;
+
+    @include tablet {
+      @include t-button($primary-dark-color);
+    }
+  }
+
   &--dangerous-emphasis {
     @include m-button($primary-light-color);
     background-color: $accent-negative-color;

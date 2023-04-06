@@ -20,6 +20,13 @@
 
   &__body-large {
     @include t-body-large($primary-dark-color);
+    font-weight: 700;
+  }
+
+  &__user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
   &__profile-link {
