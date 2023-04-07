@@ -14,7 +14,6 @@ export default function PropertiesListingPage() {
     useContext(PropertiesContext);
   const [filteredProperties, setFilteredProperties] = useState();
   const [sort, setSort] = useState();
-  // const [params, setParams] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
 
@@ -38,24 +37,12 @@ export default function PropertiesListingPage() {
     setSearchKeyword(e.target.value);
   };
 
-  const handleOnFilter = (query, value) => {
-    // const searchParams = createSearchParams(params);
-
-    // if (params.includes(query)) searchParams.delete(query);
-    // else searchParams.append(query, value);
-
-    // setParams(searchParams.toString());
-
-    // navigate({
-    //   pathname: "/listings",
-    //   search: searchParams.toString(),
-    // });
+  const handleOnFilter = (e, query, value) => {
+    e.preventDefault();
 
     const newFilter = allProperties.filter((prop) => {
-      console.log(prop[query], value);
       return prop[query] === value;
     });
-    console.log(newFilter);
 
     setFilteredProperties(newFilter);
   };
@@ -67,23 +54,23 @@ export default function PropertiesListingPage() {
           className="property-list__searchbar"
           type="text"
           onChange={handleOnSearch}
-          placeholder="Search for city"
+          placeholder="Search by city"
         />
 
         <Button
           icon={houseIcon}
           emphasis="low-emphasis"
-          handleOnClick={() => handleOnFilter("type", "house")}
+          handleOnClick={(e) => handleOnFilter(e, "type", "house")}
         />
         <Button
           icon={aptIcon}
           emphasis="low-emphasis"
-          handleOnClick={() => handleOnFilter("type", "apartment")}
+          handleOnClick={(e) => handleOnFilter(e, "type", "apartment")}
         />
         <Button
           icon={petIcon}
           emphasis="low-emphasis"
-          handleOnClick={() => handleOnFilter("pets", 1)}
+          handleOnClick={(e) => handleOnFilter(e, "pets", 1)}
         />
         <Button
           emphasis="low-emphasis"
