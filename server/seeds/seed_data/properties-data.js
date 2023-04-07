@@ -4,7 +4,7 @@ module.exports = [
     user_id: "d9ef9352-2367-4272-8884-70cf80cb7a38",
     address: "123 Main St",
     city: "Anytown",
-    state: "CA",
+    state: "NY",
     country: "USA",
     area: "1000 sqft",
     price: "$1500/month",
@@ -19,6 +19,8 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture1.jpg,https:/example.com/picture2.jpg,https://example.com/picture3.jpg",
+    lat: 40.730395,
+    lng: -73.997963,
   },
   {
     id: "bb1491eb-30e6-4728-a5fa-72f89feaf622",
@@ -40,6 +42,8 @@ module.exports = [
     pets: false,
     pictures:
       "https://example.com/picture4.jpg,https://example.com/picture5.jpg,https://example.com/picture6.jpg",
+    lat: 42.453416,
+    lng: -76.473598,
   },
   {
     id: "ade0a47b-cee6-4693-b4cd-a7e6cb25f4b7",
@@ -61,6 +65,8 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture7.jpg,https://example.com/picture8.jpg,https://example.com/picture9.jpg",
+    lat: 40.724888,
+    lng: -73.996311,
   },
   {
     id: "89898957-04ba-4bd0-9f5c-a7aea7447963",
@@ -82,6 +88,8 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture10.jpg,https://example.com/picture11.jpg,https://example.com/picture12.jpg",
+    lat: 40.689247,
+    lng: -74.044502,
   },
   {
     id: "bfc9bea7-66f1-44e9-879b-4d363a888eb4",
@@ -101,9 +109,10 @@ module.exports = [
     amenities: "Gym, pool, parking",
     type: "apartment",
     pets: false,
-    pictures: [
+    pictures:
       "https://example.com/picture13.jpg,https://example.com/picture14.jpg,https://example.com/picture15.jpg",
-    ],
+    lat: 40.748817,
+    lng: -73.985428,
   },
   {
     id: "bfc9bea7-66f1-44e9-879b-4d363a888eb5",
@@ -125,6 +134,8 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture16.jpg,https://example.com/picture17.jpg,https://example.com/picture18.jpg",
+    lat: 40.758896,
+    lng: -73.98513,
   },
   {
     id: "7",
@@ -146,6 +157,8 @@ module.exports = [
     pets: false,
     pictures:
       "https://example.com/picture19.jpg,https://example.com/picture20.jp,https://example.com/picture21.jpg",
+    lat: 40.782864,
+    lng: -73.965355,
   },
   {
     id: "9",
@@ -167,6 +180,8 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture22.jpg,https://example.com/picture23.jpg,https://example.com/picture24.jpg",
+    lat: 40.712732,
+    lng: -74.013332,
   },
   {
     id: "5bf7bd6c-2b16-4129-bddc-9d37ff8539e9",
@@ -188,6 +203,8 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture25.jpg,https://example.com/picture26.jpg,https://example.com/picture27.jpg",
+    lat: 40.706086,
+    lng: -73.996864,
   },
   {
     id: "2922c286-16cd-4d43-ab98-c79f698aeab0",
@@ -209,6 +226,8 @@ module.exports = [
     pets: false,
     pictures:
       "https://example.com/picture28.jpg,https://example.com/picture29.jpg,https://example.com/picture30.jpg",
+    lat: 40.779436,
+    lng: -73.963244,
   },
   {
     id: "90ac3319-70d1-4a51-b91d-ba6c2464408c",
@@ -230,6 +249,8 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture31.jpg,https://example.com/picture32.jpg,https://example.com/picture33.jpg",
+    lat: 40.752726,
+    lng: -73.977229,
   },
   {
     id: "13",
@@ -251,6 +272,8 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture34.jpg,https://example.com/picture35.jpg,https://example.com/picture36.jpg",
+    lat: 40.747992,
+    lng: -74.004764,
   },
   {
     id: "14",
@@ -272,6 +295,8 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture37.jpg,https://example.com/picture38.jpg,https://example.com/picture39.jpg",
+    lat: 40.75874,
+    lng: -73.978674,
   },
   {
     id: "15",
@@ -293,6 +318,8 @@ module.exports = [
     pets: false,
     pictures:
       "https://example.com/picture40.jpg,https://example.com/picture41.jpg,https://example.com/picture42.jpg",
+    lat: 40.85062,
+    lng: -73.878387,
   },
   {
     id: "16",
@@ -314,5 +341,7 @@ module.exports = [
     pets: true,
     pictures:
       "https://example.com/picture43.jpg,https://example.com/picture44.jpg,https://example.com/picture45.jpg",
+    lat: 40.765151,
+    lng: -73.979838,
   },
 ];

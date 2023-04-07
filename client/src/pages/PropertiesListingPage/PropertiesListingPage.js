@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropertiesContext from "../../contexts/PropertiesContext";
+import MapsWrapper from "../../components/MapsWrapper/MapsWrapper";
 import Button from "../../components/Button/Button";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import aptIcon from "../../assets/icons/apt-icon.png";
@@ -107,7 +108,9 @@ export default function PropertiesListingPage() {
                 <PropertyCard key={property.id} property={property} />
               ))}
         </div>
-        <div className="property-list__map">Maps</div>
+        <div className="property-list__map">
+          <MapsWrapper filteredProperties={filteredProperties} />
+        </div>
       </section>
     </main>
   );
