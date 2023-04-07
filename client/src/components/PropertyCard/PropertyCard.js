@@ -4,7 +4,7 @@ import ruleIcon from "../../assets/icons/rule-icon.png";
 import bedIcon from "../../assets/icons/bed-icon.png";
 import "./PropertyCard.scss";
 
-export default function PropertyCard({ property }) {
+export default function PropertyCard({ property, index }) {
   const { id, price, address, city, features, bedrooms, area } = property;
 
   return (
@@ -16,6 +16,7 @@ export default function PropertyCard({ property }) {
           alt="property's exterior"
         />
         <div className="property-card__text-content">
+          <p className="property-card__body-small">{`Ref. on map: ${index}`}</p>
           <h3 className="property-card__subheader">{price}</h3>
           <p className="property-card__body-large">{`${address}, ${city}`}</p>
           <div className="property-card__info-box flex-center">

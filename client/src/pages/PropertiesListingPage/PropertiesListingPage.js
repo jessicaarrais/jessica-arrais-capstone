@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropertiesContext from "../../contexts/PropertiesContext";
 import MapsWrapper from "../../components/MapsWrapper/MapsWrapper";
+import MarkerMaps from "../../components/MarkerMaps/MarkerMaps";
 import Button from "../../components/Button/Button";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import aptIcon from "../../assets/icons/apt-icon.png";
@@ -13,8 +14,7 @@ import "./PropertiesListingPage.scss";
 export default function PropertiesListingPage() {
   const { allProperties, registerAllProperties } =
     useContext(PropertiesContext);
-  const [filteredProperties, setFilteredProperties] = useState();
-  const [sort, setSort] = useState();
+  const [filteredProperties, setFilteredProperties] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
 
@@ -34,10 +34,12 @@ export default function PropertiesListingPage() {
     fetch();
   }, []);
 
+  // Search by city
   const handleOnSearch = (e) => {
     setSearchKeyword(e.target.value);
   };
 
+  // Filters
   const handleOnFilter = (e, query, value) => {
     e.preventDefault();
 
@@ -48,13 +50,29 @@ export default function PropertiesListingPage() {
     setFilteredProperties(newFilter);
   };
 
+  // Sort
+  const handleOnSort = (e, order) => {
+    e.preventDefault();
+
+    const newSort = filteredProperties.sort((propA, propB) => {
+      if (order === "lower") return propA.price.localeCompare(propB.price);
+      else if (order === "higher")
+        return propB.price.localeCompare(propA.price);
+    });
+
+    setFilteredProperties(newSort);
+  };
+
+  console.log(filteredProperties);
+
   return (
     <main className="property-list">
-      <div className="property-list__filters">
+      <section className="property-list__filters">
         <input
           className="property-list__searchbar"
           type="text"
           onChange={handleOnSearch}
+          value={searchKeyword}
           placeholder="Search by city"
         />
 
@@ -76,40 +94,39 @@ export default function PropertiesListingPage() {
         <Button
           emphasis="low-emphasis"
           text="Price $"
-          handleOnClick={() => setSort("lower")}
+          handleOnClick={(e) => handleOnSort(e, "lower")}
         />
         <Button
           emphasis="low-emphasis"
           text="Price $$$$"
-          handleOnClick={() => setSort("higher")}
+          handleOnClick={(e) => handleOnSort(e, "higher")}
         />
         <Button
           emphasis="low-emphasis"
           text="Clear"
-          handleOnClick={() => {
+          handleOnClick={(e) => {
             navigate("/listings");
             setFilteredProperties(allProperties);
-            setSort("");
           }}
         />
-      </div>
+      </section>
       <section className="property-list__section">
         <div className="property-list__list">
           {filteredProperties &&
             filteredProperties
               .filter((prop) => prop.city.toLowerCase().includes(searchKeyword))
-              .sort((propA, propB) => {
-                if (sort === "lower")
-                  return propA.price.localeCompare(propB.price);
-                else if (sort === "higher")
-                  return propB.price.localeCompare(propA.price);
-              })
-              .map((property) => (
-                <PropertyCard key={property.id} property={property} />
+              .map((property, index) => (
+                <PropertyCard
+                  key={property.id}
+                  property={property}
+                  index={index}
+                />
               ))}
         </div>
         <div className="property-list__map">
-          <MapsWrapper filteredProperties={filteredProperties} />
+          <MapsWrapper>
+            <MarkerMaps filteredProperties={filteredProperties} />
+          </MapsWrapper>
         </div>
       </section>
     </main>

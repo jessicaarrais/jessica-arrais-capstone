@@ -22,6 +22,6 @@ export const validateUser = async (registerUser, registerProperties) => {
     }
     return true;
   } catch (err) {
-    console.error("Invalid user");
+    console.error("Invalid user or no user logged");
   }
 };

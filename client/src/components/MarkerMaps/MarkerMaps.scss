@@ -1,0 +1,15 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.marker-maps {
+  height: 100%;
+}
+
+.content {
+  @include t-body-large($primary-dark-color);
+
+  &__link {
+    @include t-link($primary-dark-color);
+    text-decoration: underline;
+  }
+}
