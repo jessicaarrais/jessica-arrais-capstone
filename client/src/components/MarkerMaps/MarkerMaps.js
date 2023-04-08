@@ -3,9 +3,16 @@ import "./MarkerMaps.scss";
 
 export default function MarkerMaps({ filteredProperties }) {
   const ref = useRef();
-
   // Each marker is labeled with its index value.
   let labelIndex = 0;
+
+  const mapOptions = {
+    center: {
+      lat: filteredProperties?.[0]?.lat,
+      lng: filteredProperties?.[0]?.lng,
+    },
+    zoom: filteredProperties?.length > 1 ? 12 : 15,
+  };
 
   // Adds a marker to the map.
   function addMarker(location, map, price, id) {
@@ -25,7 +32,7 @@ export default function MarkerMaps({ filteredProperties }) {
       ariaLabel: price,
     });
 
-    // from the array of prices labels.
+    // Adds label from the array of labels.
     const marker = new window.google.maps.Marker({
       position: location,
       label: String(labelIndex++ % filteredProperties.length),
@@ -33,22 +40,19 @@ export default function MarkerMaps({ filteredProperties }) {
       title: "Property",
     });
 
-    marker.addListener("click", () => {
-      infoWindow.open({
-        anchor: marker,
-        map,
+    if (filteredProperties.length > 1) {
+      // Adds popup with price and link to preperty page
+      marker.addListener("click", () => {
+        infoWindow.open({
+          anchor: marker,
+          map,
+        });
       });
-    });
+    }
   }
 
   useEffect(() => {
-    const map = new window.google.maps.Map(ref.current, {
-      center: {
-        lat: 40.724787,
-        lng: -73.99449,
-      },
-      zoom: 12,
-    });
+    const map = new window.google.maps.Map(ref.current, mapOptions);
 
     filteredProperties?.forEach((prop) => {
       addMarker(

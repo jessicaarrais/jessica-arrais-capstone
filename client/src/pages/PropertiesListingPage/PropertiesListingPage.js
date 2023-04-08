@@ -54,16 +54,18 @@ export default function PropertiesListingPage() {
   const handleOnSort = (e, order) => {
     e.preventDefault();
 
-    const newSort = filteredProperties.sort((propA, propB) => {
-      if (order === "lower") return propA.price.localeCompare(propB.price);
-      else if (order === "higher")
+    const newSort = [...filteredProperties].sort((propA, propB) => {
+      if (order === "lower") {
+        return propA.price.localeCompare(propB.price);
+      } else if (order === "higher") {
         return propB.price.localeCompare(propA.price);
+      }
+      return propA;
     });
 
     setFilteredProperties(newSort);
+    console.log(filteredProperties);
   };
-
-  console.log(filteredProperties);
 
   return (
     <main className="property-list">
@@ -105,15 +107,16 @@ export default function PropertiesListingPage() {
           emphasis="low-emphasis"
           text="Clear"
           handleOnClick={(e) => {
-            navigate("/listings");
+            e.preventDefault();
             setFilteredProperties(allProperties);
+            navigate("/listings");
           }}
         />
       </section>
-      <section className="property-list__section">
-        <div className="property-list__list">
-          {filteredProperties &&
-            filteredProperties
+      {filteredProperties && (
+        <section className="property-list__section">
+          <div className="property-list__list">
+            {filteredProperties
               .filter((prop) => prop.city.toLowerCase().includes(searchKeyword))
               .map((property, index) => (
                 <PropertyCard
@@ -122,13 +125,14 @@ export default function PropertiesListingPage() {
                   index={index}
                 />
               ))}
-        </div>
-        <div className="property-list__map">
-          <MapsWrapper>
-            <MarkerMaps filteredProperties={filteredProperties} />
-          </MapsWrapper>
-        </div>
-      </section>
+          </div>
+          <div className="property-list__map">
+            <MapsWrapper>
+              <MarkerMaps filteredProperties={filteredProperties} />
+            </MapsWrapper>
+          </div>
+        </section>
+      )}
     </main>
   );
 }

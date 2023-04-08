@@ -1,0 +1,66 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.property {
+  max-width: 80rem;
+  margin: 0 auto;
+
+  &__images {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    height: 10rem;
+  }
+
+  &__img {
+    width: 16rem;
+    border-radius: 0.4rem;
+    object-fit: cover;
+  }
+
+  &__content {
+    display: flex;
+    height: calc(100vh - 20rem);
+    padding: 0.5rem 2rem;
+  }
+
+  &__left-side {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 40rem;
+  }
+
+  &__right-side {
+    gap: 1rem;
+    width: 40rem;
+  }
+
+  &__page-header {
+    @include t-page-header($primary-dark-color);
+    width: 100%;
+  }
+
+  &__text {
+    @include t-body-medium($primary-dark-color);
+
+    &--description {
+      width: 100%;
+    }
+
+    &--address {
+      width: 100%;
+    }
+  }
+
+  &__label {
+    @include t-label($secondary-dark-color);
+  }
+
+  &__map {
+    overflow: hidden;
+    width: 40rem;
+    height: 15rem;
+    border-radius: 0.4rem;
+  }
+}
