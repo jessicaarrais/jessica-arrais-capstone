@@ -1,4 +1,4 @@
-import starIcon from "../../assets/icons/star-icon.png";
+import logo from "../../assets/logos/logo.png";
 import "./Footer.scss";
 
 export default function Footer() {
@@ -17,9 +17,7 @@ export default function Footer() {
         <p className="footer__link">123 Ave, Manhattan - NY</p>
       </div>
       <div className="footer__box">
-        <img className="footer__icon" src={starIcon} alt="star icon" />
-        <img className="footer__icon" src={starIcon} alt="star icon" />
-        <img className="footer__icon" src={starIcon} alt="star icon" />
+        <img className="footer__logo" src={logo} alt="logo" />
       </div>
     </footer>
   );

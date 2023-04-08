@@ -16,14 +16,25 @@ exports.getCurrentUser = async (req, res) => {
 */
 exports.signupUser = async (req, res) => {
   try {
-    const { password } = req.body;
+    const { username, first_name, last_name, phone, email, password } =
+      req.body;
+
+    if (
+      !username.trim() ||
+      !first_name.trim() ||
+      !last_name.trim() ||
+      !phone.trim() ||
+      !email.trim() ||
+      !password.trim()
+    )
+      return res.status(400).send("Invalid password format.");
 
     bcrypt.hash(
       password,
       Number(process.env.SALT_ROUNDS),
       async (_err, hash) => {
         const id = crypto.randomUUID();
-        const user = await knex("users").insert({
+        await knex("users").insert({
           ...req.body,
           id,
           password: hash,

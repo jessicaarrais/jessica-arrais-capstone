@@ -28,23 +28,22 @@ export default function LoginPage() {
   };
 
   const handleOnSubmit = async (e) => {
+    let userToken;
     e.preventDefault();
     try {
-      const userToken = await axios.post(
+      userToken = await axios.post(
         `http://localhost:8080/api/users/signup`,
         inputValues
       );
 
-      if (!userToken.data.token) return alert("Invalid user");
-
       sessionStorage.setItem("token", userToken.data.token);
 
-      const fulfilled = await validateUser(registerUser, registerProperties);
-      if (!fulfilled) return alert("Signup failed. Try again");
+      await validateUser(registerUser, registerProperties);
 
       navigate("/");
     } catch (err) {
-      console.error(`Could not find user. Error: ${err}`);
+      if (!userToken?.data?.token) return alert("Failed signing up");
+      console.error(`Failed signing up. Error: ${err}`);
     }
   };
 
@@ -94,14 +93,13 @@ export default function LoginPage() {
           value={inputValues.password}
           handleOnChange={handleOnChange}
         />
-        <FormInput
+        {/* <FormInput
           label="Confirm Password:"
           name="confirm_password"
           type="password"
-          // value={confirmPassword}
-          // handleOnChange={handleOnChange}
-        />
-        {/* <input type="radio" /> */}
+          value={confirmPassword}
+          handleOnChange={handleOnChange}
+        /> */}
         <Button emphasis="high-emphasis" text="LOGIN" type="submit" />
       </form>
     </main>

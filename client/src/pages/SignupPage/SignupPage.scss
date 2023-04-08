@@ -3,6 +3,7 @@
 
 .signup {
   background-color: $primary-light-color;
+  height: calc(100vh - 7rem);
 
   &__page-header {
     @include t-page-header($primary-dark-color);
@@ -12,7 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     width: 24rem;
     margin: 0 auto;
     padding: 2rem;
