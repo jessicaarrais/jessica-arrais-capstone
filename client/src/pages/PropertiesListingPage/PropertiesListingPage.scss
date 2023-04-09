@@ -38,13 +38,13 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    width: 40rem;
+    width: 50%;
     padding-right: 2rem;
   }
 
   &__map {
     overflow: hidden;
-    width: 40rem;
+    width: 50%;
     border-radius: 0.4rem;
   }
 }

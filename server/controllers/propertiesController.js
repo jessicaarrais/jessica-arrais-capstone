@@ -28,6 +28,7 @@ exports.getProperty = async (req, res) => {
 exports.addProperty = async (req, res) => {
   try {
     //TODO: check if the req body contains a valid property object.
+    console.log(req.body);
     const id = crypto.randomUUID();
     await knex("properties").insert({ ...req.body, id });
 

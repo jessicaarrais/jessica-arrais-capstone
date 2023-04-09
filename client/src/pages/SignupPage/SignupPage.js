@@ -93,13 +93,7 @@ export default function LoginPage() {
           value={inputValues.password}
           handleOnChange={handleOnChange}
         />
-        {/* <FormInput
-          label="Confirm Password:"
-          name="confirm_password"
-          type="password"
-          value={confirmPassword}
-          handleOnChange={handleOnChange}
-        /> */}
+        {/* TODO: validate passwords */}
         <Button emphasis="high-emphasis" text="LOGIN" type="submit" />
       </form>
     </main>

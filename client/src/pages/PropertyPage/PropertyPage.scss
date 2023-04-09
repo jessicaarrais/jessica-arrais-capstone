@@ -25,14 +25,14 @@
   }
 
   &__left-side {
-    width: 40rem;
+    width: 50%;
   }
 
   &__right-side {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    width: 40rem;
+    width: 50%;
   }
 
   &__grid {
@@ -49,7 +49,6 @@
 
   &__map {
     overflow: hidden;
-    width: 40rem;
     height: 15rem;
     border-radius: 0.4rem;
   }
