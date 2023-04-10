@@ -13,12 +13,13 @@ export default function Header({ username }) {
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     unregisterUser();
+    navigate("/");
   };
 
   return (
     <header className="header">
       <nav className="header__box">
-        <NavLink to="/">
+        <NavLink to="/listings">
           <img className="header__logo" src={logo} alt="instahome logo" />
         </NavLink>
         {username ? (

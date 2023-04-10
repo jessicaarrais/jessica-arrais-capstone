@@ -36,12 +36,7 @@ function App() {
           path="/listings/property/:propertyId"
           element={<PropertyPage />}
         />
-        {user && (
-          <Route
-            path="/profile"
-            element={<ProfilePage user={user} properties={properties} />}
-          />
-        )}
+        {user && <Route path="/profile" element={<ProfilePage />} />}
       </Routes>
       <Footer />
     </BrowserRouter>

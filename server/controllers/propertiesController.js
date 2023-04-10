@@ -27,13 +27,15 @@ exports.getProperty = async (req, res) => {
 
 exports.addProperty = async (req, res) => {
   try {
-    //TODO: check if the req body contains a valid property object.
-    console.log(req.body);
     const id = crypto.randomUUID();
     await knex("properties").insert({ ...req.body, id });
 
-    const newPropertURL = `/api/properties/${id}`;
-    res.status(201).location(newPropertURL).send(newPropertURL);
+    const properties = await knex
+      .select("*")
+      .from("properties")
+      .where({ user_id: req.params.userId });
+
+    res.status(201).location(`/api/properties/${id}`).send(properties);
   } catch (err) {
     res.status(400).send(`Error adding property: ${err}`);
   }
@@ -53,7 +55,11 @@ exports.updateProperty = async (req, res) => {
 exports.deleteProperty = async (req, res) => {
   try {
     await knex("properties").delete().where({ id: req.params.propertyId });
-    res.status(200).send(`Property ${req.params.id} successfully deleted.`);
+    const properties = await knex
+      .select("*")
+      .from("properties")
+      .where({ user_id: req.params.userId });
+    res.status(200).send(properties);
   } catch (err) {
     res.status(400).send(`Error deleting property: ${err}`);
   }

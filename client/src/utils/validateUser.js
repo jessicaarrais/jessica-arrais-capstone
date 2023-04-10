@@ -18,7 +18,7 @@ export const validateUser = async (registerUser, registerProperties) => {
     /* user.data = [{ user }, { property if any }] */
     registerUser(user.data[0]);
     if (user.data.length > 1) {
-      registerProperties(user.data.slice(1, user.data.length - 1));
+      registerProperties(user.data.slice(1));
     }
     return true;
   } catch (err) {

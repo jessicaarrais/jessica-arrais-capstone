@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
+import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import FormInput from "../../components/FormInput/FormInput";
 import Button from "../../components/Button/Button";
 import "./ProfilePage.scss";
 
-export default function ProfilePage({ user, properties }) {
+export default function ProfilePage() {
+  const { user, properties, registerProperties } = useContext(UserContext);
+  console.log(properties, user.id);
   const [inputValues, setInputValues] = useState({
     user_id: user.id,
     address: "",
@@ -29,7 +33,6 @@ export default function ProfilePage({ user, properties }) {
     lng: -73.996209,
   });
   const navigate = useNavigate();
-  console.log(inputValues);
 
   useEffect(() => {
     if (!user) navigate("/");
@@ -43,12 +46,17 @@ export default function ProfilePage({ user, properties }) {
     e.preventDefault();
 
     try {
-      await axios.post(`http://localhost:8080/api/properties/add`, {
-        ...inputValues,
-        type: e.target.type.value,
-        pets: Boolean(e.target.pets.value),
-        availability: e.target.availability.value,
-      });
+      const userProperties = await axios.post(
+        `http://localhost:8080/api/properties/${user.id}/add`,
+        {
+          ...inputValues,
+          type: e.target.type.value,
+          pets: Boolean(e.target.pets.value),
+          availability: e.target.availability.value,
+        }
+      );
+
+      registerProperties(userProperties.data);
       alert("Property listed");
     } catch (err) {
       console.error(`Failed. Error: ${err}`);
@@ -59,15 +67,22 @@ export default function ProfilePage({ user, properties }) {
     <main className="profile">
       <div className="profile__body">
         <section className="profile__profile">
-          <h2 className="profile__page-header">{`Welcome back, ${user.first_name} ${user.last_name}! List a property!`}</h2>
+          <h2 className="profile__page-header">{`Welcome back, ${user.first_name} ${user.last_name}! Manage your properties!`}</h2>
         </section>
         {user.has_privileges === 1 && (
           <>
-            <section>
-              {/* {properties && properties.map((prop) => <p>{prop.city}</p>)} */}
+            <section className="profile__properties">
+              {properties &&
+                properties.map((property, index) => (
+                  <PropertyCard
+                    key={property.id}
+                    property={property}
+                    index={index}
+                  />
+                ))}
             </section>
             <section>
-              {/* <h2 className="listing-form__subheader">List a property!</h2> */}
+              <h2 className="listing-form__subheader">List a property!</h2>
               <form className="listing-form" onSubmit={handleOnSubmit}>
                 <div className="listing-form__left-side">
                   <FormInput
