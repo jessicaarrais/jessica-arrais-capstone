@@ -16,7 +16,7 @@ export default function LoginPage() {
     phone: "",
     email: "",
     password: "",
-    has_privileges: false, //TODO: apply option on form
+    has_privileges: true, //TODO: apply option on form
   });
   const [confirmPassword, setConfirmPassword] = useState({
     confirmPassword: "",

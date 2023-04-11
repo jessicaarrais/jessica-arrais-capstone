@@ -7,9 +7,17 @@ import FormInput from "../../components/FormInput/FormInput";
 import Button from "../../components/Button/Button";
 import "./ProfilePage.scss";
 
+const latList = [
+  40.7851, 40.7589, 40.7589, 40.7484, 40.7127, 40.7061, 40.7527, 40.7587,
+  40.5754, 73.9704, 40.8296,
+];
+const lngList = [
+  -73.9683, -73.9851, -73.9857, -74.0134, -73.9969, -73.9772, -73.9787,
+  -73.9262,
+];
+
 export default function ProfilePage() {
   const { user, properties, registerProperties } = useContext(UserContext);
-  console.log(properties, user.id);
   const [inputValues, setInputValues] = useState({
     user_id: user.id,
     address: "",
@@ -25,18 +33,27 @@ export default function ProfilePage() {
     description: "",
     features: "",
     amenities: "",
-    pictures:
-      "https%3A%2F%2Fcharlotte.axios.com%2F313890%2Fhot-homes-5-houses-for-sale-in-charlotte-ranging-from-299k-to-2-2m%2F",
     type: "",
-    pets: false,
-    lat: 40.724883,
-    lng: -73.996209,
+    pictures:
+      "https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/Stock-Modern-House-In-Twilight-AdobeStock-368976934-copy.jpg",
   });
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) navigate("/");
   }, []);
+
+  const pictureGenerator = async () => {
+    try {
+      const pictures = await axios.get(
+        `https://api.unsplash.com/photos/random?client_id=KV0k1z9ZD3wpJhxCbAVYC2NawiXsS2jybx77t9C6wL0`
+      );
+
+      setInputValues({ ...inputValues, pictures: pictures.data.urls.small });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleOnChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
@@ -46,6 +63,14 @@ export default function ProfilePage() {
     e.preventDefault();
 
     try {
+      pictureGenerator();
+    } catch (err) {
+      console.error(`Failed. Error: ${err}`);
+    } finally {
+      let randomIndex = Math.floor(Math.random() * latList.length);
+      const lat = latList[randomIndex];
+      const lng = lngList[randomIndex];
+
       const userProperties = await axios.post(
         `http://localhost:8080/api/properties/${user.id}/add`,
         {
@@ -53,13 +78,12 @@ export default function ProfilePage() {
           type: e.target.type.value,
           pets: Boolean(e.target.pets.value),
           availability: e.target.availability.value,
+          lat,
+          lng,
         }
       );
-
       registerProperties(userProperties.data);
       alert("Property listed");
-    } catch (err) {
-      console.error(`Failed. Error: ${err}`);
     }
   };
 

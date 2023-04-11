@@ -13,21 +13,6 @@ export default function PropertyCard({ property, index }) {
     property;
   const { user, registerProperties } = useContext(UserContext);
 
-  useEffect(() => {
-    const avatarGenerator = async () => {
-      try {
-        const pic = await axios.get(
-          `https://api.unsplash.com/photos/random?client_id=KV0k1z9ZD3wpJhxCbAVYC2NawiXsS2jybx77t9C6wL0`
-        );
-
-        console.log(pic.data.urls.small);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    // const pictures = avatarGenerator();
-  }, []);
-
   const handleOnDelete = async (e) => {
     e.preventDefault();
 

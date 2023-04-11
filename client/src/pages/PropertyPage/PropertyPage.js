@@ -38,8 +38,9 @@ export default function PropertyPage() {
     <main className="property">
       <section className="property__section">
         <div className="property__images">
-          <img className="property__img" src={propImage} alt="property" />
-          <img className="property__img" src={propImage} alt="property" />
+          {property?.pictures?.split(",")?.map((pic, i) => (
+            <img key={i} className="property__img" src={pic} alt="property" />
+          ))}
           <img className="property__img" src={propImage} alt="property" />
           <img className="property__img" src={propImage} alt="property" />
         </div>
