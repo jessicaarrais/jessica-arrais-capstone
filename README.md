@@ -29,7 +29,8 @@ If landlord, manage properties;
 Gets all properties from database
 Response body example: JSON
 
-````[
+```
+[
   {
     "id": "13",
     "user_id": "8f16bd30-bab5-40af-aca2-b63d5fdd1acc",
@@ -54,14 +55,48 @@ Response body example: JSON
     "lat": 40.747992,
     "lng": -74.004764
   }
-]```
+]
+```
 
 #### GET /api/properties/:propertyId
 
 Gets specific property
 Response body example: JSON
-```{
-  "id": "13",
+
+```
+{
+"id": "13",
+"user_id": "8f16bd30-bab5-40af-aca2-b63d5fdd1acc",
+"address": "456 Oak St",
+"city": "New York",
+"state": "NY",
+"country": "USA",
+"area": "1000 sqft",
+"price": "$1500/month",
+"fees": "$150/month",
+"availability": "Available in 3 weeks",
+"bedrooms": "2",
+"bathrooms": "1",
+"description": "Recently renovated apartment with modern finishes",
+"features": "New appliances, granite countertops",
+"amenities": "Laundry, parking",
+"pictures": "https://images.squarespace-cdn.com/content/v1/54d253cde4b09edbe7f6c6fe/1423070385488-JGE18IPMVEFBLL2OB0NJ/image-asset.jpeg?format=2500w,https://shhoonya.com/wp-content/uploads/2020/01/home-interiors-1280x720.jpg",
+"created_at": "2023-04-10T18:51:43.000Z",
+"updated_at": "2023-04-10T18:51:43.000Z",
+"type": "apartment",
+"pets": 1,
+"lat": 40.747992,
+"lng": -74.004764
+}
+```
+
+#### POST /api/properties/:userId/add
+
+Adds a property
+Request body example: JSON
+
+```
+{
   "user_id": "8f16bd30-bab5-40af-aca2-b63d5fdd1acc",
   "address": "456 Oak St",
   "city": "New York",
@@ -77,42 +112,17 @@ Response body example: JSON
   "features": "New appliances, granite countertops",
   "amenities": "Laundry, parking",
   "pictures": "https://images.squarespace-cdn.com/content/v1/54d253cde4b09edbe7f6c6fe/1423070385488-JGE18IPMVEFBLL2OB0NJ/image-asset.jpeg?format=2500w,https://shhoonya.com/wp-content/uploads/2020/01/home-interiors-1280x720.jpg",
-  "created_at": "2023-04-10T18:51:43.000Z",
-  "updated_at": "2023-04-10T18:51:43.000Z",
   "type": "apartment",
   "pets": 1,
   "lat": 40.747992,
   "lng": -74.004764
-}```
-
-#### POST /api/properties/:userId/add
-
-Adds a property
-Request body example: JSON
-```{
-    "user_id": "8f16bd30-bab5-40af-aca2-b63d5fdd1acc",
-    "address": "456 Oak St",
-    "city": "New York",
-    "state": "NY",
-    "country": "USA",
-    "area": "1000 sqft",
-    "price": "$1500/month",
-    "fees": "$150/month",
-    "availability": "Available in 3 weeks",
-    "bedrooms": "2",
-    "bathrooms": "1",
-    "description": "Recently renovated apartment with modern finishes",
-    "features": "New appliances, granite countertops",
-    "amenities": "Laundry, parking",
-    "pictures": "https://images.squarespace-cdn.com/content/v1/54d253cde4b09edbe7f6c6fe/1423070385488-JGE18IPMVEFBLL2OB0NJ/image-asset.jpeg?format=2500w,https://shhoonya.com/wp-content/uploads/2020/01/home-interiors-1280x720.jpg",
-    "type": "apartment",
-    "pets": 1,
-    "lat": 40.747992,
-    "lng": -74.004764
-}```
+}
+```
 
 Response body example: JSON
-```[
+
+```
+[
   {
     "id": "13",
     "user_id": "8f16bd30-bab5-40af-aca2-b63d5fdd1acc",
@@ -137,24 +147,28 @@ Response body example: JSON
     "lat": 40.747992,
     "lng": -74.004764
   }
-]```
+]
+```
 
 #### PATCH /api/properties/:propertyId/update
 
 Updates a property
 Request body example: JSON
-```{
+
+```
+{
   "fees": "$300"
-}```
+}
+```
 
 Response body example: JSON
-```Property information updated```
+`Property information updated`
 
 #### DELETE /api/properties/:propertyId/:userId/delete
 
 Deletes a property
 Response body example: JSON
-```Property propertyId successfully deleted.```
+`Property propertyId successfully deleted.`
 
 #### USER
 
@@ -162,73 +176,70 @@ Response body example: JSON
 
 Gets all users from database
 Response body example: JSON
-````
 
+```
 [
-{
-"id": "3ce124a4-78b0-4d80-91b9-11f9ced631a7",
-"first_name": "Brad",
-"last_name": "McDonald",
-"email": "bradmc@gmail.com"
-}
+  {
+    "id": "3ce124a4-78b0-4d80-91b9-11f9ced631a7",
+    "first_name": "Brad",
+    "last_name": "McDonald",
+    "email": "bradmc@gmail.com"
+  }
 ]
-
 ```
 
 #### GET /api/users/:userId
 
 Gets a specific user and its properties, if applicable
 Response body example: JSON
+
 ```
-
 [
-{
-"id": "3ce124a4-78b0-4d80-91b9-11f9ced631a7",
-"username": "bradmc",
-"first_name": "Brad",
-"last_name": "McDonald",
-"email": "bradmc@gmail.com",
-"has_privileges": 1
-},
-`if applicable`
-{
-"id": "89898957-04ba-4bd0-9f5c-a7aea7447963",
-"user_id": "3ce124a4-78b0-4d80-91b9-11f9ced631a7",
-"address": "321 Pine St",
-"city": "New York",
-"state": "NY",
-"country": "USA",
-"area": "900 sqft",
-"price": "$1200/month",
-"fees": "$75/month",
-"availability": "Available now",
-"bedrooms": "1",
-"bathrooms": "1",
-"description": "Cozy studio apartment in downtown",
-"features": "Hardwood floors, high ceilings",
-"amenities": "Laundry, parking",
-"pictures": "https://media.istockphoto.com/id/1151903312/photo/brownstone-facades-row-houses-in-an-iconic-neighborhood-of-brooklyn-heights-in-new-york-city.jpg?s=612x612&w=0&k=20&c=_nw1CPPZ3nbn9COeUx7UfMLDHmDbebVyOQbBUXAHacQ=",
-"created_at": "2023-04-10T18:51:43.000Z",
-"updated_at": "2023-04-10T18:51:43.000Z",
-"type": "apartment",
-"pets": 1,
-"lat": 40.689247,
-"lng": -74.044502
-}
+  {
+    "id": "3ce124a4-78b0-4d80-91b9-11f9ced631a7",
+    "username": "bradmc",
+    "first_name": "Brad",
+    "last_name": "McDonald",
+    "email": "bradmc@gmail.com",
+    "has_privileges": 1
+  },
+  `if applicable`
+  {
+    "id": "89898957-04ba-4bd0-9f5c-a7aea7447963",
+    "user_id": "3ce124a4-78b0-4d80-91b9-11f9ced631a7",
+    "address": "321 Pine St",
+    "city": "New York",
+    "state": "NY",
+    "country": "USA",
+    "area": "900 sqft",
+    "price": "$1200/month",
+    "fees": "$75/month",
+    "availability": "Available now",
+    "bedrooms": "1",
+    "bathrooms": "1",
+    "description": "Cozy studio apartment in downtown",
+    "features": "Hardwood floors, high ceilings",
+    "amenities": "Laundry, parking",
+    "pictures": "https://media.istockphoto.com/id/1151903312/photo/brownstone-facades-row-houses-in-an-iconic-neighborhood-of-brooklyn-heights-in-new-york-city.jpg?s=612x612&w=0&k=20&c=_nw1CPPZ3nbn9COeUx7UfMLDHmDbebVyOQbBUXAHacQ=",
+    "created_at": "2023-04-10T18:51:43.000Z",
+    "updated_at": "2023-04-10T18:51:43.000Z",
+    "type": "apartment",
+    "pets": 1,
+    "lat": 40.689247,
+    "lng": -74.044502
+  }
 ]
-
 ```
 
 #### GET /api/users/:userId/update
 
 Updates a user
 Request body example: JSON
+
 ```
-
 {
-"has_privileges": true
+  "has_privileges": true
 }
-
 ```
 
 Response body example:
@@ -238,79 +249,68 @@ Response body example:
 
 Signs up a user
 Request body example: JSON
+
 ```
-
 {
-"email": "jessica@gmail.com",
-"password": "12345",
-"username": "jessy",
-"first_name": "Jessy",
-"last_name": "Arr",
-"phone": "+1(222)333-4444",
-"has_privileges": true
+  "email": "jessica@gmail.com",
+  "password": "12345",
+  "username": "jessy",
+  "first_name": "Jessy",
+  "last_name": "Arr",
+  "phone": "+1(222)333-4444",
+  "has_privileges": true
 }
-
 ```
 
 Response body example: JSON
+
 ```
-
 {
-"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmYjRiOTM2LWNiM2ItNDE1ZC05MzI4LTc1NTQwNTA1ODYxYiIsImVtYWlsIjoiamVzc2ljYUBnbWFpbC5jb20iLCJpYXQiOjE2ODEyMjAzMDJ9.xZHFy-9sdyV3ovGobooxT9TKtyBp3rKsZ8S6-GQUNDo"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmYjRiOTM2LWNiM2ItNDE1ZC05MzI4LTc1NTQwNTA1ODYxYiIsImVtYWlsIjoiamVzc2ljYUBnbWFpbC5jb20iLCJpYXQiOjE2ODEyMjAzMDJ9.xZHFy-9sdyV3ovGobooxT9TKtyBp3rKsZ8S6-GQUNDo"
 }
-
 ```
 
 #### POST /api/users/login
 
 Logs in a user
 Request body example: JSON
+
 ```
-
 {
-"email": "jess@gmail.com",
-"password": "12345"
+  "email": "jess@gmail.com",
+  "password": "12345"
 }
-
 ```
 
 Response body example: JSON
+
 ```
-
 {
-"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYwNzFhMTMwLTI4ZGItNGE2Yi1hNDQyLWY3ZmNmMjMxZmRhYSIsImVtYWlsIjoiamVzc0BnbWFpbC5jb20iLCJpYXQiOjE2ODEyMjAwMjh9.Rv2lEJBWvo1MKA-0qIq9eQUjParl02eCIK5CSD9IYLw"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYwNzFhMTMwLTI4ZGItNGE2Yi1hNDQyLWY3ZmNmMjMxZmRhYSIsImVtYWlsIjoiamVzc0BnbWFpbC5jb20iLCJpYXQiOjE2ODEyMjAwMjh9.Rv2lEJBWvo1MKA-0qIq9eQUjParl02eCIK5CSD9IYLw"
 }
-
 ```
 
 #### PATCH /api/users/:userId/update
 
 Updates a user
 Request body example: JSON
+
 ```
-
 {
-"username": "BradMac"
+  "username": "BradMac"
 }
-
 ```
 
 Response body example:
-```
 
-User information updated
-
-```
+`User information updated`
 
 #### DELETE /api/user/:userId
 
 Deletes a user
 Response body example:
-```
 
-User userId successfully deleted.
-
-```
+`User userId successfully deleted.`
 
 ## Installation
 
@@ -344,4 +344,3 @@ Tech Stack Front-End:
 3 - Implement more filters options;
 4 - Expand to cities other than New York;
 5 - Make the design responsive;
-```
