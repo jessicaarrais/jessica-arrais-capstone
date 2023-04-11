@@ -22,9 +22,9 @@ If landlord, manage properties;
 
 ## Endpoints
 
-# PROPERTIES
+### PROPERTIES
 
-# GET /api/properties
+#### GET /api/properties
 
 Gets all properties from database
 Response body example: JSON
@@ -55,7 +55,7 @@ Response body example: JSON
   }
 ]`
 
-# GET /api/properties/:propertyId
+#### GET /api/properties/:propertyId
 
 Gets specific property
 Response body example: JSON
@@ -84,7 +84,7 @@ Response body example: JSON
   "lng": -74.004764
 }`
 
-# POST /api/properties/:userId/add
+#### POST /api/properties/:userId/add
 
 Adds a property
 Request body example: JSON
@@ -138,7 +138,7 @@ Response body example: JSON
   }
 ]`
 
-# PATCH /api/properties/:propertyId/update
+#### PATCH /api/properties/:propertyId/update
 
 Updates a property
 Request body example: JSON
@@ -149,15 +149,15 @@ Request body example: JSON
 Response body example: JSON
 `Property information updated`
 
-# DELETE /api/properties/:propertyId/:userId/delete
+#### DELETE /api/properties/:propertyId/:userId/delete
 
 Deletes a property
 Response body example: JSON
 `Property propertyId successfully deleted.`
 
-# USER
+#### USER
 
-# GET /api/users
+#### GET /api/users
 
 Gets all users from database
 Response body example: JSON
@@ -170,7 +170,7 @@ Response body example: JSON
   }
 ]`
 
-# GET /api/users/:userId
+#### GET /api/users/:userId
 
 Gets a specific user and its properties, if applicable
 Response body example: JSON
@@ -210,7 +210,7 @@ Response body example: JSON
   }
 ]`
 
-# GET /api/users/:userId/update
+#### GET /api/users/:userId/update
 
 Updates a user
 Request body example: JSON
@@ -221,11 +221,11 @@ Request body example: JSON
 Response body example:
 `User information updated`
 
-# POST /api/users/signup
+#### POST /api/users/signup
 
-# POST /api/users/login
+#### POST /api/users/login
 
-# PATCH /api/users/:userId/update
+#### PATCH /api/users/:userId/update
 
 Updates a user
 Request body example: JSON
@@ -236,7 +236,7 @@ Request body example: JSON
 Response body example:
 `"User information updated"`
 
-# DELETE /api/user/:userId
+#### DELETE /api/user/:userId
 
 Deletes a user
 Response body example:
