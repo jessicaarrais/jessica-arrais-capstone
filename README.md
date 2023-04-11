@@ -331,14 +331,14 @@ Response body example:
 
 ## Installation
 
-1 - Clone this repository: `git clone https://github.com/jessicaarrais/jessica-arrais-capstone.git`;
-2 - Go to client and server directories and install dependencies for each of them: `npm install`;
-3 - Set up database: `mysql -u root -p`;
-4 - Create database and use it: `CREATE DATABASE capstone` then `USE capstone`;
-5 - Set up knex: `npm run migrate` then `npm run seed`;
-6 - Create an .env file based on .env.example updating it with your information;
-7 - Start client: `npm start`;
-8 - Start server: `npm nodemon index`.
+1. Clone this repository: `git clone https://github.com/jessicaarrais/jessica-arrais-capstone.git`;
+2. Go to client and server directories and install dependencies for each of them: `npm install`;
+3. Set up database: `mysql -u root -p`;
+4. Create database and use it: `CREATE DATABASE capstone` then `USE capstone`;
+5. Set up knex: `npm run migrate` then `npm run seed`;
+6. Create an .env file based on .env.example updating it with your information;
+7. Start client: `npm start`;
+8. Start server: `npm nodemon index`.
 
 ## Conclusion
 
@@ -356,8 +356,8 @@ Tech Stack Front-End:
 
 ## Next steps
 
-1 - Implement google maps showing directions from a point of interest;
-2 - Implement messaging within the application to facilitate the comunication between renter and landlord;
-3 - Implement more filters options;
-4 - Expand to cities other than New York;
-5 - Make the design responsive;
+1. Implement google maps showing directions from a point of interest;
+2. Implement messaging within the application to facilitate the comunication between renter and landlord;
+3. Implement more filters options;
+4. Expand to cities other than New York;
+5. Make the design responsive;
