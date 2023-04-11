@@ -36,6 +36,16 @@ If landlord, manage properties;
 
 <img width="1679" alt="Screenshot 2023-04-11 at 11 17 39 AM" src="https://user-images.githubusercontent.com/28935420/231212927-0273fc6b-6763-4636-8f9c-4a58641df031.png">
 
+## Installation
+
+1. Clone this repository: `git clone https://github.com/jessicaarrais/jessica-arrais-capstone.git`;
+2. Go to client and server directories and install dependencies for each of them: `npm install`;
+3. Set up database: `mysql -u root -p`;
+4. Create database and use it: `CREATE DATABASE capstone` then `USE capstone`;
+5. Set up knex: `npm run migrate` then `npm run seed`;
+6. Create an .env file based on .env.example updating it with your information;
+7. Start client: `npm start`;
+8. Start server: `npm nodemon index`.
 
 ## Endpoints
 
@@ -328,17 +338,6 @@ Deletes a user
 Response body example:
 
 `User userId successfully deleted.`
-
-## Installation
-
-1. Clone this repository: `git clone https://github.com/jessicaarrais/jessica-arrais-capstone.git`;
-2. Go to client and server directories and install dependencies for each of them: `npm install`;
-3. Set up database: `mysql -u root -p`;
-4. Create database and use it: `CREATE DATABASE capstone` then `USE capstone`;
-5. Set up knex: `npm run migrate` then `npm run seed`;
-6. Create an .env file based on .env.example updating it with your information;
-7. Start client: `npm start`;
-8. Start server: `npm nodemon index`.
 
 ## Conclusion
 
