@@ -20,6 +20,23 @@ Browse properties on the map;
 Use the card on the list or the marker on map to browse to property page;
 If landlord, manage properties;
 
+## User Flow
+
+<img width="1679" alt="Screenshot 2023-04-11 at 11 17 49 AM" src="https://user-images.githubusercontent.com/28935420/231212416-da773a8b-bf2d-440f-a6ae-1c6ba48eadec.png">
+
+<img width="1679" alt="Screenshot 2023-04-11 at 11 18 01 AM" src="https://user-images.githubusercontent.com/28935420/231212258-6e837281-0486-4e26-a12b-b0998de8c8e0.png">
+
+<img width="1679" alt="Screenshot 2023-04-11 at 11 17 57 AM" src="https://user-images.githubusercontent.com/28935420/231212311-5e5f5086-b246-46d5-b39c-097d7bd47b87.png">
+
+<img width="1679" alt="Screenshot 2023-04-11 at 11 17 20 AM" src="https://user-images.githubusercontent.com/28935420/231212479-87ed3b3f-3f6a-440f-a087-c78ac1736ece.png">
+
+<img width="1679" alt="Screenshot 2023-04-11 at 11 27 48 AM" src="https://user-images.githubusercontent.com/28935420/231212773-6973ec23-4ccd-4ff9-8bec-7dcb7fe48e19.png">
+
+<img width="1679" alt="Screenshot 2023-04-11 at 11 17 34 AM" src="https://user-images.githubusercontent.com/28935420/231212835-57ec334e-86c4-4e23-b954-c47a47eced02.png">
+
+<img width="1679" alt="Screenshot 2023-04-11 at 11 17 39 AM" src="https://user-images.githubusercontent.com/28935420/231212927-0273fc6b-6763-4636-8f9c-4a58641df031.png">
+
+
 ## Endpoints
 
 ### PROPERTIES
