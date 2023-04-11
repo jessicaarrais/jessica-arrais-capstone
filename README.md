@@ -223,7 +223,36 @@ Response body example:
 
 #### POST /api/users/signup
 
+Signs up a user
+Request body example: JSON
+`{
+  "email": "jessica@gmail.com",
+  "password": "12345",
+  "username": "jessy",
+  "first_name": "Jessy",
+  "last_name": "Arr",
+  "phone": "+1(222)333-4444",
+  "has_privileges": true
+}`
+
+Response body example: JSON
+`{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmYjRiOTM2LWNiM2ItNDE1ZC05MzI4LTc1NTQwNTA1ODYxYiIsImVtYWlsIjoiamVzc2ljYUBnbWFpbC5jb20iLCJpYXQiOjE2ODEyMjAzMDJ9.xZHFy-9sdyV3ovGobooxT9TKtyBp3rKsZ8S6-GQUNDo"
+}`
+
 #### POST /api/users/login
+
+Logs in a user
+Request body example: JSON
+`{
+  "email": "jess@gmail.com",
+  "password": "12345"
+}`
+
+Response body example: JSON
+`{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYwNzFhMTMwLTI4ZGItNGE2Yi1hNDQyLWY3ZmNmMjMxZmRhYSIsImVtYWlsIjoiamVzc0BnbWFpbC5jb20iLCJpYXQiOjE2ODEyMjAwMjh9.Rv2lEJBWvo1MKA-0qIq9eQUjParl02eCIK5CSD9IYLw"
+}`
 
 #### PATCH /api/users/:userId/update
 
