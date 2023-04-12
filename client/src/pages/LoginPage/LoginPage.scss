@@ -2,7 +2,7 @@
 @use "../../styles/partials/variables" as *;
 
 .login {
-  height: calc(100vh - 7rem);
+  min-height: calc(100vh - 7rem);
 
   &__page-header {
     @include t-page-header($primary-dark-color);
