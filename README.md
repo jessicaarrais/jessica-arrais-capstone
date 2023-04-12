@@ -45,7 +45,7 @@ If landlord, manage properties;
 5. Set up knex: `npm run migrate` then `npm run seed`;
 6. Create an .env file based on .env.example updating it with your information;
 7. Start client: `npm start`;
-8. Start server: `npm nodemon index`.
+8. Start server: `npx nodemon index`.
 
 ## Endpoints
 
