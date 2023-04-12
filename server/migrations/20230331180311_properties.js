@@ -26,8 +26,8 @@ exports.up = function (knex) {
     table.string("type").notNullable();
     table.boolean("pets").notNullable();
     table.string("pictures").notNullable();
-    table.integer("lat").notNullable();
-    table.integer("lng").notNullable();
+    table.decimal("lat").notNullable();
+    table.decimal("lng").notNullable();
     table.timestamps(true, true);
   });
 };
