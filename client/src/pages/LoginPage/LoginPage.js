@@ -33,7 +33,7 @@ export default function LoginPage() {
       const fulfilled = await validateUser(registerUser, registerProperties);
       if (!fulfilled) return alert("Login failed. Try again");
 
-      navigate("/");
+      navigate("/listings");
     } catch (err) {
       console.error(`Could not find user. Error: ${err}`);
     }

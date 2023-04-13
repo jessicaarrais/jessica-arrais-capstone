@@ -7,13 +7,14 @@ import "./Header.scss";
 import { useContext } from "react";
 
 export default function Header({ username }) {
-  const { unregisterUser } = useContext(UserContext);
+  const { unregisterUser, unregisterProperties } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     unregisterUser();
-    navigate("/");
+    unregisterProperties();
+    navigate("/listings");
   };
 
   return (

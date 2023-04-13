@@ -40,7 +40,7 @@ export default function LoginPage() {
 
       await validateUser(registerUser, registerProperties);
 
-      navigate("/");
+      navigate("/listings");
     } catch (err) {
       if (!userToken?.data?.token) return alert("Failed signing up");
       console.error(`Failed signing up. Error: ${err}`);
