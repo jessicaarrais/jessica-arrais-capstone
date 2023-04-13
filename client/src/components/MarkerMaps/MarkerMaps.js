@@ -79,12 +79,10 @@ export default function MarkerMaps({ filteredProperties }) {
   useEffect(() => {
     console.log("check");
     if (!renderedMap) {
-      console.log("check1");
       const tempMap = new window.google.maps.Map(ref.current, mapOptions);
       setRenderedMap(tempMap);
       addMarkerToProperties(tempMap);
     } else {
-      console.log("check2");
       clearMarkers(prevMarkersRef.current);
       addMarkerToProperties(renderedMap);
     }
