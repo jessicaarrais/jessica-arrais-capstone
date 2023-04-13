@@ -1,11 +1,10 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
-import placeholderImg from "../../assets/images/placeholder-img.jpg";
 import ruleIcon from "../../assets/icons/rule-icon.png";
 import bedIcon from "../../assets/icons/bed-icon.png";
-import deleteIcon from "../../assets/icons/delete-icon.png";
+import deleteIcon from "../../assets/icons/delete.svg";
 import "./PropertyCard.scss";
 
 export default function PropertyCard({ property, index }) {

@@ -74,7 +74,7 @@ export default function PropertiesListingPage() {
           type="text"
           onChange={handleOnSearch}
           value={searchKeyword}
-          placeholder="Search by city"
+          placeholder="Search by address"
         />
 
         <Button
@@ -116,7 +116,9 @@ export default function PropertiesListingPage() {
         <section className="property-list__section">
           <div className="property-list__list">
             {filteredProperties
-              .filter((prop) => prop.city.toLowerCase().includes(searchKeyword))
+              .filter((prop) =>
+                prop.address.toLowerCase().includes(searchKeyword)
+              )
               .map((property, index) => (
                 <PropertyCard
                   key={property.id}

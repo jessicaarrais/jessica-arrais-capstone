@@ -5,13 +5,16 @@ import reportWebVitals from "./reportWebVitals";
 import UserContextProvider from "./contexts/UserContextProvider";
 import "./index.scss";
 import PropertiesContextProvider from "./contexts/PropertiesContextProvider";
+import MapsContextProvider from "./contexts/MapsContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <UserContextProvider>
       <PropertiesContextProvider>
-        <App />
+        <MapsContextProvider>
+          <App />
+        </MapsContextProvider>
       </PropertiesContextProvider>
     </UserContextProvider>
   </React.StrictMode>

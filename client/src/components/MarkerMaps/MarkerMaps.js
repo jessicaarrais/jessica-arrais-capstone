@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import "./MarkerMaps.scss";
+import MapsContext from "../../contexts/MapsContext";
 
 export default function MarkerMaps({ filteredProperties }) {
-  const [renderedMap, setRenderedMap] = useState(null);
+  const { renderedMap, registerMaps } = useContext(MapsContext);
   const prevMarkersRef = useRef([]);
-  const ref = useRef();
+  const mapRef = useRef();
   // Each marker is labeled with its index value.
   let labelIndex = 0;
 
@@ -78,8 +79,8 @@ export default function MarkerMaps({ filteredProperties }) {
 
   useEffect(() => {
     if (!renderedMap) {
-      const tempMap = new window.google.maps.Map(ref.current, mapOptions);
-      setRenderedMap(tempMap);
+      const tempMap = new window.google.maps.Map(mapRef.current, mapOptions);
+      registerMaps(tempMap);
       addMarkerToProperties(tempMap);
     } else {
       clearMarkers(prevMarkersRef.current);
@@ -87,5 +88,5 @@ export default function MarkerMaps({ filteredProperties }) {
     }
   }, [filteredProperties]);
 
-  return <div ref={ref} className="marker-maps" />;
+  return <div ref={mapRef} className="marker-maps" />;
 }
