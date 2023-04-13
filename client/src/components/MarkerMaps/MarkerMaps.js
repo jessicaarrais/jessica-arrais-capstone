@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./MarkerMaps.scss";
 
 export default function MarkerMaps({ filteredProperties }) {
+  const [renderedMap, setRenderedMap] = useState(null);
+  const prevMarkersRef = useRef([]);
   const ref = useRef();
   // Each marker is labeled with its index value.
   let labelIndex = 0;
@@ -36,7 +38,7 @@ export default function MarkerMaps({ filteredProperties }) {
     const marker = new window.google.maps.Marker({
       position: location,
       label: String(labelIndex++ % filteredProperties.length),
-      map: map,
+      map,
       title: "Property",
     });
 
@@ -49,13 +51,13 @@ export default function MarkerMaps({ filteredProperties }) {
         });
       });
     }
+
+    return marker;
   }
 
-  useEffect(() => {
-    const map = new window.google.maps.Map(ref.current, mapOptions);
-
+  const addMarkerToProperties = (map) => {
     filteredProperties?.forEach((prop) => {
-      addMarker(
+      const marker = addMarker(
         {
           lat: prop.lat,
           lng: prop.lng,
@@ -64,8 +66,26 @@ export default function MarkerMaps({ filteredProperties }) {
         prop.price,
         prop.id
       );
+      prevMarkersRef.current.push(marker);
     });
-  });
+  };
+
+  function clearMarkers(markers) {
+    for (let m of markers) {
+      m.setMap(null);
+    }
+  }
+
+  useEffect(() => {
+    if (!renderedMap) {
+      const tempMap = new window.google.maps.Map(ref.current, mapOptions);
+      setRenderedMap(tempMap);
+      addMarkerToProperties(tempMap);
+    } else {
+      clearMarkers(prevMarkersRef.current);
+      addMarkerToProperties(renderedMap);
+    }
+  }, [filteredProperties]);
 
   return <div ref={ref} className="marker-maps" />;
 }

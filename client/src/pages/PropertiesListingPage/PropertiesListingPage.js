@@ -64,7 +64,6 @@ export default function PropertiesListingPage() {
     });
 
     setFilteredProperties(newSort);
-    console.log(filteredProperties);
   };
 
   return (

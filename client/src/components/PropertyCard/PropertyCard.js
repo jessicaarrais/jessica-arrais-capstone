@@ -29,7 +29,11 @@ export default function PropertyCard({ property, index }) {
   };
 
   return (
-    <Link to={`/listings/property/${id}`}>
+    <Link
+      to={`/listings/property/${id}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <div className="property-card">
         <img
           className="property-card__img"
