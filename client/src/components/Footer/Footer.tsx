@@ -1,4 +1,4 @@
-import logo from "../../assets/logos/logo.png";
+import logo from "../../assets/logos/logo.png"
 import "./Footer.scss";
 
 export default function Footer() {
@@ -22,3 +22,4 @@ export default function Footer() {
     </footer>
   );
 }
+

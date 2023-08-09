@@ -1,21 +1,21 @@
 import { useState, useMemo } from "react";
-import UserContext from "./UserContext";
+import UserContext, { User, Property, UserContextType } from "./UserContext";
 
-export default function UserContextProvider(props) {
-  const [user, setUser] = useState(null);
-  const [properties, setProperties] = useState(null);
+export default function UserContextProvider(props: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [properties, setProperties] = useState<Property[] | null>(null);
 
-  const contextValue = useMemo(
+  const contextValue: UserContextType = useMemo(
     () => ({
       user,
-      registerUser: (user) => {
+      registerUser: (user: User) => {
         setUser(user);
       },
       unregisterUser: () => {
         setUser(null);
       },
       properties,
-      registerProperties: (properties) => {
+      registerProperties: (properties: Property[]) => {
         setProperties(properties);
       },
       unregisterProperties: () => {
