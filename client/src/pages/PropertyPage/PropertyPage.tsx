@@ -15,8 +15,35 @@ import featuresIcon from "../../assets/icons/features-icon.png";
 import amenitiesIcon from "../../assets/icons/amenities-icon.png";
 import "./PropertyPage.scss";
 
+export interface Property {
+  first_name: string,
+  email: string,
+  id: string,
+  user_id: string,
+  address: string,
+  city: string,
+  state: string,
+  country: string,
+  area: string,
+  price: string,
+  fees: string,
+  availability: string,
+  bedrooms: string,
+  bathrooms: string,
+  description: string,
+  features: string,
+  amenities: string,
+  pictures: string,
+  created_at: string,
+  updated_at: string,
+  type: string,
+  pets: number,
+  lat: number,
+  lng: number,
+};
+
 export default function PropertyPage() {
-  const [property, setProperty] = useState();
+  const [property, setProperty] = useState<Property>();
   const { propertyId } = useParams();
 
   useEffect(() => {

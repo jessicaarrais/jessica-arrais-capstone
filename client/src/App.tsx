@@ -8,7 +8,7 @@ import PropertiesListingPage from "./pages/PropertiesListingPage/PropertiesListi
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import UserContext, { Property, User, UserContextType } from "./contexts/UserContext";
+import UserContext from "./contexts/UserContext";
 import "./App.scss";
 import LandingPage from "./pages/LandingPage/LandingPage";
 

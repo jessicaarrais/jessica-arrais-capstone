@@ -1,13 +1,22 @@
 import "./Button.scss";
 
+type ButtonProps = {
+  emphasis: string,
+  type?: "button" | "submit" | "reset",
+  icon?: string,
+  text?: string,
+  mHidden?: boolean,
+  handleOnClick?: React.MouseEventHandler<HTMLButtonElement>,
+};
+
 export default function Button({
   emphasis,
   type,
-  icon = null,
-  text = null,
-  mHidden = null,
-  handleOnClick = null,
-}) {
+  icon,
+  text,
+  mHidden,
+  handleOnClick,
+} : ButtonProps) {
   return (
     <button
       className={`default-button default-button--${emphasis} ${

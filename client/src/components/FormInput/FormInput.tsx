@@ -1,12 +1,20 @@
 import "./FormInput.scss";
 
+type FormInputProps = {
+  label: string,
+  name: string,
+  type: React.HTMLInputTypeAttribute,
+  value: string | number | readonly string[],
+  handleOnChange: React.ChangeEventHandler<HTMLInputElement>,
+};
+
 export default function FormInput({
   label,
   name,
   type,
   value,
   handleOnChange,
-}) {
+}: FormInputProps) {
   return (
     <div className="input__box">
       <label className="input__label" htmlFor={name}>
