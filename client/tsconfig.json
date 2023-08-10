@@ -111,6 +111,8 @@
     "./src/components/Footer/Footer.tsx",
     "./src/components/Button/Button.tsx",
     "./src/components/FormInput/FormInput.tsx",
+    "./src/components/Header/Header.tsx",
+    "./src/components/PropertyCard/PropertyCard.tsx",
     "./src/contexts/UserContext.tsx",
     "./src/contexts/UserContextProvider.tsx",
     "types.d.ts"

@@ -1,19 +1,19 @@
+import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import Button from "../Button/Button";
 import logo from "../../assets/logos/logo.png";
 import userAvatar from "../../assets/images/placeholder-avatar.png";
 import "./Header.scss";
-import { useContext } from "react";
 
-export default function Header({ username }) {
-  const { unregisterUser, unregisterProperties } = useContext(UserContext);
+export default function Header({ username }: { username: string | undefined}) {
+  const currentUserContext = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
-    unregisterUser();
-    unregisterProperties();
+    currentUserContext?.unregisterUser();
+    currentUserContext?.unregisterProperties();
     navigate("/listings");
   };
 
