@@ -30,10 +30,12 @@ export default function LoginPage() {
 
       sessionStorage.setItem("token", user.data.token);
 
-      const fulfilled = await validateUser(
-        currentUserContext?.registerUser,
-        currentUserContext?.registerProperties
-      );
+      const fulfilled =
+        currentUserContext &&
+        (await validateUser(
+          currentUserContext.registerUser,
+          currentUserContext.registerProperties
+        ));
       if (!fulfilled) return alert("Login failed. Try again");
 
       navigate("/listings");

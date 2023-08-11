@@ -1,6 +1,7 @@
 import axios from "axios";
+import { Property, User } from "../contexts/UserContext";
 
-export const validateUser = async (registerUser, registerProperties) => {
+export const validateUser = async (registerUser: (user: User) => void, registerProperties: (properties: Property[]) => void) => {
   try {
     const currentUser = await axios.get(
       `http://localhost:8080/api/users/currentUser`,

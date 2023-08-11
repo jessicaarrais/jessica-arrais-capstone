@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropertiesContext from "../../contexts/PropertiesContext";
 import MapsWrapper from "../../components/MapsWrapper/MapsWrapper";
@@ -9,12 +9,13 @@ import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import aptIcon from "../../assets/icons/apt-icon.png";
 import houseIcon from "../../assets/icons/house-icon.png";
 import petIcon from "../../assets/icons/pet-icon.png";
+import { Property } from "../../contexts/UserContext";
 import "./PropertiesListingPage.scss";
+import { KeyObject } from "tls";
 
 export default function PropertiesListingPage() {
-  const { allProperties, registerAllProperties } =
-    useContext(PropertiesContext);
-  const [filteredProperties, setFilteredProperties] = useState([]);
+  const currentPropertiesContext = useContext(PropertiesContext);
+  const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ export default function PropertiesListingPage() {
         const properties = await axios.get(
           `http://localhost:8080/api/properties`
         );
-        registerAllProperties(properties.data);
+        currentPropertiesContext?.registerAllProperties(properties.data);
         setFilteredProperties(properties.data);
       } catch (err) {
         console.error(`Faild retrieving properties list. Error: ${err}`);
@@ -35,23 +36,33 @@ export default function PropertiesListingPage() {
   }, []);
 
   // Search by city
-  const handleOnSearch = (e) => {
+  const handleOnSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
   };
 
   // Filters
-  const handleOnFilter = (e, query, value) => {
+  const handleOnFilter = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    query: string,
+    value: string | number
+  ) => {
     e.preventDefault();
 
-    const newFilter = allProperties.filter((prop) => {
-      return prop[query] === value;
-    });
+    const newFilter = currentPropertiesContext?.allProperties?.filter(
+      (prop: Property) => {
+        // @ts-ignore
+        return prop[query] === value;
+      }
+    );
 
-    setFilteredProperties(newFilter);
+    setFilteredProperties(newFilter || []);
   };
 
   // Sort
-  const handleOnSort = (e, order) => {
+  const handleOnSort = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    order: string
+  ) => {
     e.preventDefault();
 
     const newSort = [...filteredProperties].sort((propA, propB) => {
@@ -60,7 +71,7 @@ export default function PropertiesListingPage() {
       } else if (order === "higher") {
         return propB.price.localeCompare(propA.price);
       }
-      return propA;
+      return 0;
     });
 
     setFilteredProperties(newSort);
@@ -107,7 +118,9 @@ export default function PropertiesListingPage() {
           text="Clear"
           handleOnClick={(e) => {
             e.preventDefault();
-            setFilteredProperties(allProperties);
+            setFilteredProperties(
+              currentPropertiesContext?.allProperties || []
+            );
             navigate("/listings");
           }}
         />

@@ -20,7 +20,11 @@ function App() {
       return;
     }
 
-    validateUser(currentUserContext?.registerUser, currentUserContext?.registerProperties);
+    if (currentUserContext)
+      validateUser(
+        currentUserContext.registerUser,
+        currentUserContext.registerProperties
+      );
   }, []);
 
   return (
@@ -35,7 +39,9 @@ function App() {
           path="/listings/property/:propertyId"
           element={<PropertyPage />}
         />
-        {currentUserContext?.user && <Route path="/profile" element={<ProfilePage />} />}
+        {currentUserContext?.user && (
+          <Route path="/profile" element={<ProfilePage />} />
+        )}
       </Routes>
       <Footer />
     </BrowserRouter>

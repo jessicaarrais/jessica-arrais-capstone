@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState, useContext, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateUser } from "../../utils/validateUser";
 import Button from "../../components/Button/Button";
@@ -8,7 +8,7 @@ import UserContext from "../../contexts/UserContext";
 import "./SignupPage.scss";
 
 export default function LoginPage() {
-  const { registerUser, registerProperties } = useContext(UserContext);
+  const currentUserContext = useContext(UserContext);
   const [inputValues, setInputValues] = useState({
     username: "",
     first_name: "",
@@ -23,11 +23,11 @@ export default function LoginPage() {
   });
   const navigate = useNavigate();
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
 
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = async (e: FormEvent) => {
     let userToken;
     e.preventDefault();
     try {
@@ -38,9 +38,13 @@ export default function LoginPage() {
 
       sessionStorage.setItem("token", userToken.data.token);
 
-      await validateUser(registerUser, registerProperties);
-
-      navigate("/listings");
+      if (currentUserContext) {
+        await validateUser(
+          currentUserContext.registerUser,
+          currentUserContext.registerProperties
+        );
+        navigate("/listings");
+      }
     } catch (err) {
       if (!userToken?.data?.token) return alert("Failed signing up");
       console.error(`Failed signing up. Error: ${err}`);
