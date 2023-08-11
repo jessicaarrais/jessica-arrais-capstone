@@ -1,7 +1,8 @@
-require("dotenv").config();
-/**
- * @type { Object.<string, import("knex").Knex.Config> }
- */
+import * as dotenv from "dotenv";
+import { Knex } from "knex";
+
+dotenv.config();
+
 module.exports = {
   client: "mysql",
   connection: {
@@ -11,4 +12,4 @@ module.exports = {
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
   },
-};
+} as Knex.Config;

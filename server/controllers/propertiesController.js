@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const knex = require("knex")(require("../knexfile"));
+const knex = require("knex")(require("../src/knexfile"));
 
 exports.getAllProperties = async (_req, res) => {
   try {

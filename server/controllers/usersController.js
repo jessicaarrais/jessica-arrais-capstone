@@ -2,7 +2,7 @@ require("dotenv").config();
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const knex = require("knex")(require("../knexfile"));
+const knex = require("knex")(require("../src/knexfile"));
 
 /* 
   Response format { id, email, iat }

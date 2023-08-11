@@ -1,10 +1,10 @@
 require("dotenv").config();
-const express = require("express");
+import cors = require("cors");
+import propertiesRoute = require("./routes/propertiesRoute");
+import usersRoute = require("./routes/usersRoute");
+import express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8081;
-const cors = require("cors");
-const propertiesRoute = require("./routes/propertiesRoute");
-const usersRoute = require("./routes/usersRoute");
 
 app.use(cors());
 app.use(express.json());
