@@ -72,9 +72,8 @@ export default function ProfilePage() {
     } catch (err) {
       console.error(`Failed. Error: ${err}`);
     } finally {
-      let randomIndex = Math.floor(Math.random() * latList.length);
-      const lat = latList[randomIndex];
-      const lng = lngList[randomIndex];
+      const lat = latList[Math.floor(Math.random() * latList.length)];
+      const lng = lngList[Math.floor(Math.random() * lngList.length)];
 
       const userProperties = await axios.post(
         `http://localhost:8080/api/properties/${currentUserContext?.user?.id}/add`,
