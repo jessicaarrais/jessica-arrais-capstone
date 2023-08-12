@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
+import * as jwt from "jsonwebtoken";
 
-const authorize = (req, res, next) => {
+export const authorize = (req, res, next) => {
   if (!req.headers.authorization)
     return res.status(401).send("You need to be logged in.");
 
@@ -16,4 +16,3 @@ const authorize = (req, res, next) => {
   }
 };
 
-module.exports = authorize;

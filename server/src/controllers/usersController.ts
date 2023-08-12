@@ -1,20 +1,25 @@
-require("dotenv").config();
-const crypto = require("crypto");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const knex = require("knex")(require("../src/knexfile"));
+import * as dotenv from "dotenv";
+import * as crypto from "crypto";
+import * as bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
+import { knex as knexModule } from "knex";
+import { knexConfig } from "../knexfile";
+
+dotenv.config();
+
+const knex = knexModule(knexConfig);
 
 /* 
   Response format { id, email, iat }
 */
-exports.getCurrentUser = async (req, res) => {
+export const getCurrentUser = async (req, res) => {
   if (req.validatedToken) res.json(req.validatedToken);
 };
 
 /* 
   Response format { token }
 */
-exports.signupUser = async (req, res) => {
+export const signupUser = async (req, res) => {
   try {
     const { username, first_name, last_name, phone, email, password } =
       req.body;
@@ -56,7 +61,7 @@ exports.signupUser = async (req, res) => {
 /* 
   Response format { token }
 */
-exports.loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await knex("users").where({ email });
@@ -83,7 +88,7 @@ exports.loginUser = async (req, res) => {
 /* 
   Response format [{ id, first_name, last_name, email }]
 */
-exports.getUsers = async (_req, res) => {
+export const getUsers = async (_req, res) => {
   try {
     const users = await knex
       .select("id", "first_name", "last_name", "email")
@@ -103,7 +108,7 @@ exports.getUsers = async (_req, res) => {
     }
   ]
 */
-exports.getUser = async (req, res) => {
+export const getUser = async (req, res) => {
   try {
     const user = await knex
       .select(
@@ -129,7 +134,7 @@ exports.getUser = async (req, res) => {
   }
 };
 
-exports.updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
     await knex("users").update(req.body).where({ id: req.params.userId });
     res.status(200).json("User information updated");
@@ -138,7 +143,7 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   try {
     await knex("users").delete().where({ id: req.params.userId });
     res.status(200).json(`User ${req.params.userId} successfully deleted.`);

@@ -1,7 +1,10 @@
-const crypto = require("crypto");
-const knex = require("knex")(require("../src/knexfile"));
+import * as crypto from "crypto";
+import { knex as knexModule } from "knex";
+import { knexConfig } from "../knexfile";
 
-exports.getAllProperties = async (_req, res) => {
+const knex = knexModule(knexConfig);
+
+export const getAllProperties = async (_req, res) => {
   try {
     const data = await knex("properties");
     res.status(200).json(data);
@@ -10,7 +13,7 @@ exports.getAllProperties = async (_req, res) => {
   }
 };
 
-exports.getProperty = async (req, res) => {
+export const getProperty = async (req, res) => {
   try {
     const data = await knex
       .select(["properties.*", "users.first_name", "users.email"])
@@ -25,7 +28,7 @@ exports.getProperty = async (req, res) => {
   }
 };
 
-exports.addProperty = async (req, res) => {
+export const addProperty = async (req, res) => {
   try {
     const id = crypto.randomUUID();
     await knex("properties").insert({ ...req.body, id });
@@ -41,7 +44,7 @@ exports.addProperty = async (req, res) => {
   }
 };
 
-exports.updateProperty = async (req, res) => {
+export const updateProperty = async (req, res) => {
   try {
     await knex("properties")
       .update(req.body)
@@ -52,7 +55,7 @@ exports.updateProperty = async (req, res) => {
   }
 };
 
-exports.deleteProperty = async (req, res) => {
+export const deleteProperty = async (req, res) => {
   try {
     await knex("properties").delete().where({ id: req.params.propertyId });
     const properties = await knex

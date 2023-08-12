@@ -3,7 +3,7 @@ import { Knex } from "knex";
 
 dotenv.config();
 
-module.exports = {
+export const knexConfig: Knex.Config = {
   client: "mysql",
   connection: {
     host: "127.0.0.1",
@@ -12,4 +12,4 @@ module.exports = {
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
   },
-} as Knex.Config;
+};
