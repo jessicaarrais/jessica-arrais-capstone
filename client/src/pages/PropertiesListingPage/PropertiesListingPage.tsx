@@ -12,18 +12,11 @@ import houseIcon from "../../assets/icons/house-icon.png";
 import petIcon from "../../assets/icons/pet-icon.png";
 import { Property } from "../../contexts/UserContext";
 import "./PropertiesListingPage.scss";
-import { KeyObject } from "tls";
 
 export default function PropertiesListingPage() {
-<<<<<<< HEAD:client/src/pages/PropertiesListingPage/PropertiesListingPage.js
-  const { allProperties, registerAllProperties } =
-    useContext(PropertiesContext);
-  const { properties } = useContext(UserContext);
-  const [filteredProperties, setFilteredProperties] = useState([]);
-=======
+  const currentUserContext = useContext(UserContext);
   const currentPropertiesContext = useContext(PropertiesContext);
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
->>>>>>> typescript:client/src/pages/PropertiesListingPage/PropertiesListingPage.tsx
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
 
@@ -41,7 +34,7 @@ export default function PropertiesListingPage() {
     };
 
     fetch();
-  }, [properties]);
+  }, [currentUserContext?.properties]);
 
   // Search by city
   const handleOnSearch = (e: ChangeEvent<HTMLInputElement>) => {
