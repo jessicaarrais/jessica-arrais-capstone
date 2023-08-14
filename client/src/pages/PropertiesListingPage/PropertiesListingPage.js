@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropertiesContext from "../../contexts/PropertiesContext";
+import UserContext from "../../contexts/UserContext";
 import MapsWrapper from "../../components/MapsWrapper/MapsWrapper";
 import MarkerMaps from "../../components/MarkerMaps/MarkerMaps";
 import Button from "../../components/Button/Button";
@@ -14,6 +15,7 @@ import "./PropertiesListingPage.scss";
 export default function PropertiesListingPage() {
   const { allProperties, registerAllProperties } =
     useContext(PropertiesContext);
+  const { properties } = useContext(UserContext);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ export default function PropertiesListingPage() {
     };
 
     fetch();
-  }, []);
+  }, [properties]);
 
   // Search by city
   const handleOnSearch = (e) => {
