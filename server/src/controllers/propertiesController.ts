@@ -1,6 +1,6 @@
 import * as crypto from "crypto";
 import { knex as knexModule } from "knex";
-import { knexConfig } from "../knexfile";
+const knexConfig = require("../knexfile");
 
 const knex = knexModule(knexConfig);
 

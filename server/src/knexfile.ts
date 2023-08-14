@@ -1,9 +1,9 @@
 import * as dotenv from "dotenv";
-import { Knex } from "knex";
+require('ts-node/register');
 
 dotenv.config();
 
-export const knexConfig: Knex.Config = {
+module.exports = {
   client: "mysql",
   connection: {
     host: "127.0.0.1",

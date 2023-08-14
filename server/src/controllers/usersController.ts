@@ -3,7 +3,7 @@ import * as crypto from "crypto";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { knex as knexModule } from "knex";
-import { knexConfig } from "../knexfile";
+const knexConfig = require("../knexfile");
 
 dotenv.config();
 
