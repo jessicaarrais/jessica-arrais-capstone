@@ -15,7 +15,7 @@ export default function MarkerMaps({ filteredProperties }) {
       lat: filteredProperties?.[0]?.lat || 40.782864,
       lng: filteredProperties?.[0]?.lng || -73.965355,
     },
-    zoom: filteredProperties?.length > 1 ? 12 : 15,
+    zoom: 12,
   };
 
   // Adds a marker to the map.
@@ -79,7 +79,6 @@ export default function MarkerMaps({ filteredProperties }) {
   }
 
   useEffect(() => {
-    console.log("check");
     if (!renderedMap) {
       const tempMap = new window.google.maps.Map(ref.current, mapOptions);
       setRenderedMap(tempMap);
@@ -88,7 +87,7 @@ export default function MarkerMaps({ filteredProperties }) {
       clearMarkers(prevMarkersRef.current);
       addMarkerToProperties(renderedMap);
     }
-  }, [filteredProperties, renderedMap]);
+  }, [filteredProperties]);
 
   return <div ref={ref} className="marker-maps" />;
 }

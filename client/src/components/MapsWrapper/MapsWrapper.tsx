@@ -6,9 +6,15 @@ export default function MapsWrapper(props: { children: React.ReactNode }) {
     return <h1>Loading...</h1>;
   };
 
+  const apiKey = process.env.REACT_APP_MAPS_API_KEY;
+
   return (
-    <Wrapper apiKey="AIzaSyDDI5_IX46u4HqwoYMx2iG7y4O1AHuU31w" render={render}>
-      {props.children}
-    </Wrapper>
+    <>
+      {apiKey && (
+        <Wrapper apiKey={apiKey} render={render}>
+          {props.children}
+        </Wrapper>
+      )}
+    </>
   );
 }

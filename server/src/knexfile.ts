@@ -1,7 +1,4 @@
-import * as dotenv from "dotenv";
 require('ts-node/register');
-
-dotenv.config();
 
 module.exports = {
   client: "mysql",
